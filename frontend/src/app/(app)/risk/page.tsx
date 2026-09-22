@@ -1,13 +1,12 @@
 "use client";
 import React, { useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function RiskAnalysisPage() {
   const router = useRouter();
   const [search, setSearch] = useState("");
 
-  const totalBidders = 32;
+  const totalBidders: number = 32;
   const lowRiskCount = 20;
   const mediumRiskCount = 8;
   const highRiskCount = 4;

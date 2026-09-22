@@ -1,22 +1,30 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useAuth } from "@/lib/auth";
+import { Logo, LogoIcon } from "@/components/ui/Logo";
+import { CommandPalette } from "@/components/ui/CommandPalette";
 
 export function Shell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const router = useRouter();
-  const { user, logout } = useAuth();
-  const [searchQuery, setSearchQuery] = useState("");
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      router.push(`/tenders?q=${encodeURIComponent(searchQuery.trim())}`);
-    }
-  };
+  const { user, logout } = useAuth();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isCommandOpen, setIsCommandOpen] = useState(false);
+
+  // Ctrl+K handler
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        setIsCommandOpen(true);
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, []);
 
   const navCategories = [
     {
@@ -148,8 +156,19 @@ export function Shell({ children }: { children: React.ReactNode }) {
     }
   ];
 
+  // Derive breadcrumb from pathname
+  const breadcrumbLabel = (() => {
+    const segments = pathname.split("/").filter(Boolean);
+    if (segments.length === 0) return "Dashboard";
+    const last = segments[segments.length - 1];
+    return last.split("-").map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+  })();
+
   return (
     <div className="bg-[#f8fafc] text-slate-800 antialiased min-h-screen flex flex-col font-sans">
+      {/* Command Palette */}
+      <CommandPalette isOpen={isCommandOpen} onClose={() => setIsCommandOpen(false)} />
+
       {/* TopHeader */}
       <header className="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-xs h-16 flex items-center shrink-0">
         <div className="w-full flex items-center justify-between px-4 lg:px-6">
@@ -162,41 +181,42 @@ export function Shell({ children }: { children: React.ReactNode }) {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
+            {/* Breadcrumb */}
             <div className="hidden sm:flex items-center text-sm font-medium text-slate-500 gap-2">
-              <span className="hover:text-slate-800 cursor-pointer transition">Dashboard</span>
-              <span>/</span>
-              <span className="text-slate-800 font-semibold">Bid Compliance</span>
+              <Link href="/dashboard" className="hover:text-slate-800 transition">Dashboard</Link>
+              {pathname !== "/dashboard" && (
+                <>
+                  <span className="text-slate-300">/</span>
+                  <span className="text-slate-800 font-semibold">{breadcrumbLabel}</span>
+                </>
+              )}
             </div>
           </div>
 
+          {/* Search Trigger */}
           <div className="flex-1 max-w-xl hidden md:block">
-            <form onSubmit={handleSearch} className="relative">
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search tenders, bidders, GSTIN, PAN, Udyam..."
-                className="w-full bg-slate-50 hover:bg-slate-100 focus:bg-white text-sm text-slate-800 placeholder-slate-400 pl-10 pr-24 py-2 rounded-xl border border-slate-200 focus:border-gem-600 focus:ring-1 focus:ring-gem-600 transition outline-none shadow-2xs"
-              />
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              </div>
-              <span className="absolute right-2.5 top-2 text-[11px] font-mono text-slate-400 border border-slate-200 rounded px-1.5 bg-white shadow-2xs">
+            <button
+              onClick={() => setIsCommandOpen(true)}
+              className="w-full flex items-center gap-3 bg-slate-50 hover:bg-slate-100 text-sm text-slate-400 pl-10 pr-24 py-2 rounded-xl border border-slate-200 transition outline-none shadow-2xs relative text-left"
+            >
+              <svg className="w-4 h-4 absolute left-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              Search tenders, bidders, GSTIN, PAN, Udyam…
+              <span className="absolute right-2.5 text-[11px] font-mono text-slate-400 border border-slate-200 rounded px-1.5 py-0.5 bg-white shadow-2xs">
                 Ctrl + K
               </span>
-            </form>
+            </button>
           </div>
 
-          <div className="flex items-center gap-4 flex-1 justify-end">
-            <button className="relative p-2 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition">
+          <div className="flex items-center gap-3 flex-1 justify-end">
+            <button className="relative p-2 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition" aria-label="Notifications">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
               </svg>
               <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-rose-500 ring-2 ring-white"></span>
             </button>
-            <button className="p-2 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition hidden sm:block">
+            <button className="p-2 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition hidden sm:block" aria-label="Help">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
@@ -221,30 +241,37 @@ export function Shell({ children }: { children: React.ReactNode }) {
 
       <div className="flex-1 flex overflow-hidden">
         {/* LeftSidebar */}
-        <aside className={`w-72 bg-white border-r border-slate-200 flex flex-col shrink-0 transition-transform duration-300 z-30 absolute lg:relative lg:translate-x-0 h-[calc(100vh-4rem)] ${isSidebarOpen ? "translate-x-0 shadow-2xl lg:shadow-none" : "-translate-x-full"}`}>
+        <aside className={`${isSidebarCollapsed ? 'w-[72px]' : 'w-72'} bg-white border-r border-slate-200 flex flex-col shrink-0 transition-all duration-300 z-30 absolute lg:relative lg:translate-x-0 h-[calc(100vh-4rem)] ${isSidebarOpen ? "translate-x-0 shadow-2xl lg:shadow-none" : "-translate-x-full"}`}>
+          {/* Logo */}
           <div className="p-4 border-b border-slate-100">
-            <Link href="/dashboard" className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gem-900 flex items-center justify-center text-amber-400 font-bold shadow-md">
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2C10.9 2 10 2.9 10 4V6H14V4C14 2.9 13.1 2 12 2M6 8V10C6 11.1 6.9 12 8 12H9V18H7V20H17V18H15V12H16C17.1 12 18 11.1 18 10V8H6M12 7C12.55 7 13 7.45 13 8C13 8.55 12.55 9 12 9C11.45 9 11 8.55 11 8C11 7.45 11.45 7 12 7Z" />
-                </svg>
-              </div>
-              <div>
-                <div className="flex items-center gap-2 mb-0.5">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Government e-Marketplace</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <span className="text-sm font-black text-slate-900 tracking-tight leading-tight">Bid Compliance<br/>Copilot</span>
-                  <span className="bg-blue-50 text-blue-700 text-[9px] font-bold px-1.5 py-0.5 rounded border border-blue-200 uppercase tracking-wider">SIH 2026</span>
-                </div>
-              </div>
-            </Link>
+            {isSidebarCollapsed ? (
+              <Link href="/dashboard" className="flex justify-center">
+                <LogoIcon size="md" />
+              </Link>
+            ) : (
+              <Link href="/dashboard">
+                <Logo size="md" />
+              </Link>
+            )}
           </div>
 
-          <div className="flex-1 overflow-y-auto p-4 space-y-6 scrollbar-thin">
+          {/* Collapse toggle (desktop only) */}
+          <button
+            onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+            className="hidden lg:flex absolute -right-3 top-20 w-6 h-6 bg-white border border-slate-200 rounded-full items-center justify-center text-slate-400 hover:text-slate-600 shadow-sm z-40 transition"
+            aria-label={isSidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+          >
+            <svg className={`w-3 h-3 transition-transform ${isSidebarCollapsed ? '' : 'rotate-180'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+
+          <div className="flex-1 overflow-y-auto p-3 space-y-5 scrollbar-thin">
             {navCategories.map((category, idx) => (
               <div key={idx}>
-                <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider px-3 mb-2">{category.title}</p>
+                {!isSidebarCollapsed && (
+                  <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider px-3 mb-2">{category.title}</p>
+                )}
                 <nav className="space-y-0.5">
                   {category.items.map((item) => {
                     const active = pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href));
@@ -252,7 +279,8 @@ export function Shell({ children }: { children: React.ReactNode }) {
                       <Link
                         key={item.href}
                         href={item.href}
-                        className={`group flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg transition relative overflow-hidden ${
+                        title={isSidebarCollapsed ? item.label : undefined}
+                        className={`group flex items-center ${isSidebarCollapsed ? 'justify-center' : ''} gap-3 px-3 py-2 text-sm font-medium rounded-lg transition relative overflow-hidden ${
                           active
                             ? "bg-blue-50/80 text-gem-700 shadow-sm"
                             : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
@@ -260,15 +288,15 @@ export function Shell({ children }: { children: React.ReactNode }) {
                       >
                         {active && <div className="absolute left-0 top-0 bottom-0 w-1 bg-gem-600 rounded-r-full"></div>}
                         <span className={`${active ? "text-gem-600" : "text-slate-400 group-hover:text-slate-600"} transition-colors`}>{item.icon}</span>
-                        <span>{item.label}</span>
-                        {item.badge && (
+                        {!isSidebarCollapsed && <span className="truncate">{item.label}</span>}
+                        {!isSidebarCollapsed && "badge" in item && item.badge && (
                           <span className={`ml-auto text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider ${
                             active ? "bg-white text-gem-700 shadow-xs" : "bg-slate-100 text-slate-500"
                           }`}>
                             {item.badge}
                           </span>
                         )}
-                        {item.pulse && (
+                        {!isSidebarCollapsed && "pulse" in item && item.pulse && (
                           <span className="ml-auto flex items-center">
                             <span className="absolute inline-flex h-2.5 w-2.5 animate-ping rounded-full bg-emerald-400 opacity-75"></span>
                             <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500"></span>
@@ -282,22 +310,25 @@ export function Shell({ children }: { children: React.ReactNode }) {
             ))}
           </div>
 
-          <div className="p-4 border-t border-slate-100 bg-slate-50 mt-auto">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-              </span>
-              <span className="text-xs font-semibold text-slate-600">All Systems Operational</span>
-            </div>
+          <div className={`p-4 border-t border-slate-100 bg-slate-50 mt-auto ${isSidebarCollapsed ? 'px-2' : ''}`}>
+            {!isSidebarCollapsed && (
+              <div className="flex items-center gap-2 mb-3">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <span className="text-xs font-semibold text-slate-600">All Systems Operational</span>
+              </div>
+            )}
             <button
               onClick={logout}
+              title={isSidebarCollapsed ? "Sign Out" : undefined}
               className="w-full flex items-center justify-center gap-2 px-3 py-2 text-xs font-bold rounded-lg bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-rose-600 transition shadow-xs"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
               </svg>
-              <span>Sign Out</span>
+              {!isSidebarCollapsed && <span>Sign Out</span>}
             </button>
           </div>
         </aside>
@@ -311,7 +342,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
 
         {/* Main Content */}
         <main className="flex-1 overflow-y-auto bg-[#f8fafc] p-4 sm:p-6 lg:p-8">
-          <div className="max-w-[1400px] mx-auto">
+          <div className="max-w-[1400px] mx-auto animate-fade-in">
             {children}
           </div>
         </main>

@@ -126,7 +126,7 @@ export default function AuditTrailPage() {
             <div className="absolute left-4 top-4 bottom-4 w-px bg-slate-200 z-0"></div>
 
             <div className="space-y-8">
-              {filteredEvents.map((evt, idx) => (
+              {filteredEvents.map((evt) => (
                 <div key={evt.id} className="relative flex gap-6 group">
                   {getEventIcon(evt.type)}
                   

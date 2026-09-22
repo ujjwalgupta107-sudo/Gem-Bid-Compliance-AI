@@ -21,7 +21,13 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
   }
   if (token) headers["Authorization"] = `Bearer ${token}`;
 
-  const res = await fetch(`${API_BASE}${path}`, { ...options, headers });
+  let res: Response;
+  try {
+    res = await fetch(`${API_BASE}${path}`, { ...options, headers });
+  } catch (err) {
+    throw new ApiError("Unable to connect to the authentication service.", 0);
+  }
+
   if (!res.ok) {
     let detail = res.statusText;
     try {

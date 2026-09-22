@@ -63,7 +63,7 @@ export default function EvidenceViewerPage() {
           <div className="flex-1 overflow-y-auto p-6 flex justify-center bg-slate-200/50 relative">
              {/* Mock PDF Document */}
              <div className="w-[600px] bg-white shadow-lg p-12 text-slate-800 font-serif text-sm relative">
-                <h2 className="text-xl font-bold mb-6 border-b border-slate-800 pb-2 text-center">INDEPENDENT AUDITOR'S REPORT</h2>
+                <h2 className="text-xl font-bold mb-6 border-b border-slate-800 pb-2 text-center">INDEPENDENT AUDITOR&apos;S REPORT</h2>
                 <p className="mb-4 text-justify leading-relaxed">
                   We have audited the financial statements of Sunrise Traders Private Limited, which comprise the balance sheet as at March 31, 2025, and the statement of profit and loss...
                 </p>
@@ -84,7 +84,7 @@ export default function EvidenceViewerPage() {
                   </table>
                 </div>
                 <p className="text-justify leading-relaxed">
-                  The Company's management is responsible for the preparation of these financial statements...
+                  The Company&apos;s management is responsible for the preparation of these financial statements...
                 </p>
              </div>
           </div>
@@ -138,7 +138,7 @@ export default function EvidenceViewerPage() {
                   <span className="bg-white border border-amber-200 text-amber-700 text-[9px] font-bold px-1.5 py-0.5 rounded shadow-2xs">89% Confidence</span>
                 </div>
                 <p className="text-xs text-amber-800/80 mb-3 leading-relaxed">
-                  The company name on the uploaded PAN card is "Sunrise Traders", but the registered GeM profile name is "Sunrise Traders Private Limited".
+                  The company name on the uploaded PAN card is &quot;Sunrise Traders&quot;, but the registered GeM profile name is &quot;Sunrise Traders Private Limited&quot;.
                 </p>
                 <div className="flex gap-2">
                    <button className="text-[10px] font-bold uppercase tracking-wider bg-white border border-slate-200 text-slate-600 px-2 py-1 rounded shadow-2xs hover:bg-slate-50">View PAN Card</button>
