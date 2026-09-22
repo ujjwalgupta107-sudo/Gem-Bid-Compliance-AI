@@ -14,7 +14,7 @@ const REGISTRIES = [
 
 export function GovernmentHub3D() {
   const handleSceneReady = (scene: THREE.Scene) => {
-    // Center Core (Bid Compliance Copilot)
+    // Center Core (Bid Compliance Platform)
     const coreGeom = new THREE.IcosahedronGeometry(1.2, 2);
     const coreMat = new THREE.MeshStandardMaterial({
       color: 0x3b82f6,

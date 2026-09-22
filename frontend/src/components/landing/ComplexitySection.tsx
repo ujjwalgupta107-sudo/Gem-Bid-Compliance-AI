@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { BrandText } from "@/components/ui/BrandText";
 import { Cpu, ShieldCheck, Database, FileSearch, Layers, Activity, Lock, UserCheck } from "lucide-react";
 
 interface CapabilityModule {
@@ -106,7 +107,7 @@ export function ComplexitySection() {
           Architecture & Engineering Complexity
         </span>
         <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
-          Why Bid Compliance Copilot Is Technically Advanced
+          Why <BrandText inline /> Is Technically Advanced
         </h2>
         <p className="text-slate-400 text-sm leading-relaxed">
           Government tender compliance requires zero tolerance for errors. Explore the 8 core engineering modules powering the platform.

@@ -91,7 +91,7 @@ export default function DashboardPage() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 animate-fade-in-up">
         <div>
           <h1 className="text-3xl font-black text-white tracking-tight">Bid Compliance Overview</h1>
-          <p className="text-sm text-slate-400 mt-1">Monitor tender verification, statutory compliance and bidder risk in real time.</p>
+          <p className="text-sm text-slate-300 mt-1">Monitor tender verification, statutory compliance and bidder risk in real time.</p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
           <button className="bg-white/5 border border-white/10 hover:bg-white/10 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-colors flex items-center gap-2">
@@ -111,19 +111,19 @@ export default function DashboardPage() {
       {loading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {[1,2,3,4].map(i => (
-            <div key={i} className="bg-[#0B0F17]/40 backdrop-blur-md rounded-2xl p-5 border border-white/10 shadow-sm animate-pulse h-32">
+            <div key={i} className="bg-[#0F172A]/40 backdrop-blur-md rounded-2xl p-5 border border-white/10 shadow-sm animate-pulse h-32">
               <div className="h-4 bg-white/10 rounded w-24 mb-3" />
               <div className="h-8 bg-white/10 rounded w-16" />
             </div>
           ))}
         </div>
       ) : totalBids === 0 ? (
-        <div className="w-full bg-[#0B0F17]/40 backdrop-blur-md border border-white/10 rounded-2xl p-12 flex flex-col items-center justify-center text-center shadow-[0_0_30px_rgba(0,245,255,0.03)] animate-fade-in-up">
+        <div className="w-full bg-[#0F172A]/40 backdrop-blur-md border border-white/10 rounded-2xl p-12 flex flex-col items-center justify-center text-center shadow-[0_0_30px_rgba(0,245,255,0.03)] animate-fade-in-up">
           <div className="w-16 h-16 bg-[#00F5FF]/10 rounded-2xl flex items-center justify-center mb-4 border border-[#00F5FF]/20 shadow-[0_0_15px_rgba(0,245,255,0.1)]">
              <svg className="w-8 h-8 text-[#00F5FF]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" /></svg>
           </div>
           <h2 className="text-xl font-bold text-white mb-2">No bids evaluated yet</h2>
-          <p className="text-slate-400 max-w-md">Connect your first tender to start automatically evaluating bidder compliance and extracting AI insights.</p>
+          <p className="text-slate-300 max-w-md">Connect your first tender to start automatically evaluating bidder compliance and extracting AI insights.</p>
           <button onClick={() => router.push("/tenders")} className="mt-6 btn-primary py-2.5">
             Import Tender
           </button>
@@ -136,7 +136,7 @@ export default function DashboardPage() {
               <Link
                 key={kpi.id}
                 href={kpi.href}
-                className="bg-[#0B0F17]/40 backdrop-blur-md rounded-2xl p-5 border border-white/10 relative overflow-hidden group hover:shadow-[0_0_20px_rgba(0,245,255,0.1)] hover:border-[#00F5FF]/30 hover:-translate-y-0.5 transition-all cursor-pointer"
+                className="bg-[#0F172A]/40 backdrop-blur-md rounded-2xl p-5 border border-white/10 relative overflow-hidden group hover:shadow-[0_0_20px_rgba(0,245,255,0.1)] hover:border-[#00F5FF]/30 hover:-translate-y-0.5 transition-all cursor-pointer"
                 onMouseEnter={() => setHoveredKpi(kpi.id)}
                 onMouseLeave={() => setHoveredKpi(null)}
               >
@@ -148,7 +148,7 @@ export default function DashboardPage() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={kpi.iconPath} />
                       </svg>
                     </div>
-                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">{kpi.label}</p>
+                    <p className="text-[10px] font-bold text-slate-300 uppercase tracking-wider">{kpi.label}</p>
                   </div>
                   <p className="text-4xl font-black text-white tracking-tight">{kpi.value}</p>
                   
@@ -164,7 +164,7 @@ export default function DashboardPage() {
           {/* COMPLIANCE STATUS + CONNECTORS */}
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 animate-fade-in-up delay-200">
             {/* COMPLIANCE DONUT CHART */}
-            <div className="lg:col-span-3 bg-[#0B0F17]/40 backdrop-blur-md rounded-2xl border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.2)] p-6 hover:border-white/20 transition-colors">
+            <div className="lg:col-span-3 bg-[#0F172A]/40 backdrop-blur-md rounded-2xl border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.2)] p-6 hover:border-white/20 transition-colors">
               <h2 className="text-base font-bold text-white mb-6 flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#00F5FF]"></span>
                 Compliance Status Distribution
@@ -179,7 +179,7 @@ export default function DashboardPage() {
                   </svg>
                   <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
                     <span className="text-3xl font-black text-white">{totalBids}</span>
-                    <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400 mt-1">Total Bids</span>
+                    <span className="text-[10px] uppercase font-bold tracking-wider text-slate-300 mt-1">Total Bids</span>
                   </div>
                 </div>
                 <div className="space-y-3 text-sm font-medium flex-1 w-full">
@@ -205,11 +205,11 @@ export default function DashboardPage() {
             </div>
 
             {/* GOVERNMENT CONNECTORS STATUS */}
-            <div className="lg:col-span-2 bg-[#0B0F17]/40 backdrop-blur-md rounded-2xl border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.2)] overflow-hidden flex flex-col hover:border-white/20 transition-colors">
+            <div className="lg:col-span-2 bg-[#0F172A]/40 backdrop-blur-md rounded-2xl border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.2)] overflow-hidden flex flex-col hover:border-white/20 transition-colors">
               <div className="p-5 border-b border-white/10 flex justify-between items-center bg-white/5">
                 <div>
                   <h2 className="text-base font-bold text-white">Government Connectors</h2>
-                  <p className="text-xs text-slate-400 mt-0.5">Registry health status</p>
+                  <p className="text-xs text-slate-300 mt-0.5">Registry health status</p>
                 </div>
                 <div className="flex items-center gap-2 text-[10px] uppercase tracking-wider font-bold px-3 py-1.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-lg">
                   <span className="relative flex h-2 w-2">
@@ -233,7 +233,7 @@ export default function DashboardPage() {
                       </div>
                       <div>
                         <p className="text-sm font-semibold text-white group-hover:text-[#00F5FF] transition-colors">{conn.name}</p>
-                        <p className="text-[10px] text-slate-400 font-mono mt-0.5">{conn.sync}</p>
+                        <p className="text-[10px] text-slate-300 font-mono mt-0.5">{conn.sync}</p>
                       </div>
                     </div>
                     <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wider border ${conn.bg} ${conn.color} ${conn.border}`}>
@@ -248,14 +248,14 @@ export default function DashboardPage() {
 
           {/* RECENT ACTIVITY FEED */}
           {data?.recent_activity && data.recent_activity.length > 0 && (
-            <div className="bg-[#0B0F17]/40 backdrop-blur-md rounded-2xl border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.2)] overflow-hidden animate-fade-in-up delay-300">
+            <div className="bg-[#0F172A]/40 backdrop-blur-md rounded-2xl border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.2)] overflow-hidden animate-fade-in-up delay-300">
               <div className="p-5 border-b border-white/10 bg-white/5 flex justify-between items-center">
                 <div>
                   <h2 className="text-base font-bold text-white flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#0070F3]"></span>
                     Recent Activity
                   </h2>
-                  <p className="text-xs text-slate-400 mt-0.5">Latest system events and verifications</p>
+                  <p className="text-xs text-slate-300 mt-0.5">Latest system events and verifications</p>
                 </div>
                 <Link href="/audit-trail" className="text-[11px] uppercase tracking-wider font-bold text-[#00F5FF] hover:text-white transition-colors">
                   View Full Audit Trail →
@@ -265,7 +265,7 @@ export default function DashboardPage() {
                 {data.recent_activity.slice(0, 8).map((event, idx) => (
                   <div key={idx} className="px-5 py-4 flex items-center gap-4 hover:bg-white/5 transition-colors cursor-default">
                     <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0 shadow-[inset_0_1px_3px_rgba(255,255,255,0.1)]">
-                      <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                     </div>
@@ -275,7 +275,7 @@ export default function DashboardPage() {
                       </p>
                       <p className="text-[10px] text-slate-500 uppercase tracking-wider font-mono mt-0.5">{event.entity_type}</p>
                     </div>
-                    <span className="text-xs text-slate-400 font-mono shrink-0">
+                    <span className="text-xs text-slate-300 font-mono shrink-0">
                       {new Date(event.timestamp).toLocaleString()}
                     </span>
                   </div>
@@ -286,14 +286,14 @@ export default function DashboardPage() {
 
           {/* RECENT TENDERS */}
           {data?.recent_tenders && data.recent_tenders.length > 0 && (
-            <div className="bg-[#0B0F17]/40 backdrop-blur-md rounded-2xl border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.2)] overflow-hidden animate-fade-in-up delay-400">
+            <div className="bg-[#0F172A]/40 backdrop-blur-md rounded-2xl border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.2)] overflow-hidden animate-fade-in-up delay-400">
               <div className="p-5 border-b border-white/10 bg-white/5 flex justify-between items-center">
                 <div>
                   <h2 className="text-base font-bold text-white flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#00F5FF]"></span>
                     Priority Tenders
                   </h2>
-                  <p className="text-xs text-slate-400 mt-0.5">Active tenders requiring attention</p>
+                  <p className="text-xs text-slate-300 mt-0.5">Active tenders requiring attention</p>
                 </div>
                 <Link href="/tenders" className="text-[11px] uppercase tracking-wider font-bold text-[#00F5FF] hover:text-white transition-colors">
                   View All Tenders →
@@ -302,7 +302,7 @@ export default function DashboardPage() {
               <div className="overflow-x-auto">
                 <table className="w-full text-left">
                   <thead>
-                    <tr className="bg-white/5 text-[10px] font-bold text-slate-400 uppercase tracking-wider border-b border-white/10">
+                    <tr className="bg-white/5 text-[10px] font-bold text-slate-300 uppercase tracking-wider border-b border-white/10">
                       <th className="px-5 py-4">Tender</th>
                       <th className="px-5 py-4">Organization</th>
                       <th className="px-5 py-4 hidden md:table-cell">Category</th>

@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/lib/auth";
 import { ApiError } from "@/lib/api";
 import LoginIntelligenceNetwork from "@/components/3d/LoginIntelligenceNetwork";
+import { Logo } from "@/components/ui/Logo";
+import { BrandText } from "@/components/ui/BrandText";
 
 export default function LoginPage() {
   const { login } = useAuth();
@@ -44,18 +46,18 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#0B0F17] text-white relative overflow-hidden">
-      {/* Top Tricolor Accent Line */}
-      <div className="h-1.5 w-full bg-gradient-to-r from-amber-500 via-white to-emerald-600 fixed top-0 left-0 right-0 z-50"></div>
+    <div className="min-h-screen flex flex-col bg-[#0F172A] text-white relative overflow-hidden">
+      {/* Subtle Tricolour Header Line */}
+      <div className="h-[2px] w-full bg-gradient-to-r from-orange-500 via-white to-green-600 fixed top-0 left-0 z-50 shadow-[0_2px_10px_rgba(255,255,255,0.1)]"></div>
 
       <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 min-h-screen relative z-10">
         {/* Left Branding Panel */}
         <div className="hidden lg:flex lg:col-span-7 flex-col justify-between p-12 lg:p-16 relative overflow-hidden">
           <LoginIntelligenceNetwork />
-          <div className="absolute inset-0 bg-[#0B0F17]/20 pointer-events-none" />
+          <div className="absolute inset-0 bg-[#0F172A]/20 pointer-events-none" />
 
           <div className="relative z-10 flex flex-col items-start gap-6">
-            <a href="/" className="inline-flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-[#00F5FF] transition-colors bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg backdrop-blur-sm">
+            <a href="/" className="inline-flex items-center gap-2 text-xs font-bold text-slate-300 hover:text-[#00F5FF] transition-colors bg-white/10 border border-white/20 px-3 py-1.5 rounded-lg backdrop-blur-sm">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
               </svg>
@@ -63,16 +65,16 @@ export default function LoginPage() {
             </a>
             
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gem-900 flex items-center justify-center text-amber-400 font-bold shadow-sm ring-1 ring-gem-700">
+              <div className="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-amber-400 font-bold shadow-sm ring-1 ring-slate-700">
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2C10.9 2 10 2.9 10 4V6H14V4C14 2.9 13.1 2 12 2M6 8V10C6 11.1 6.9 12 8 12H9V18H7V20H17V18H15V12H16C17.1 12 18 11.1 18 10V8H6M12 7C12.55 7 13 7.45 13 8C13 8.55 12.55 9 12 9C11.45 9 11 8.55 11 8C11 7.45 11.45 7 12 7Z" />
                 </svg>
               </div>
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Government e-Marketplace</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-300">Government e-Marketplace</span>
                 <div className="flex items-center gap-2">
-                  <span className="text-xl font-black text-white tracking-tight">Bid Compliance Copilot</span>
-                  <span className="bg-gem-800 text-amber-300 text-[10px] font-bold px-2 py-0.5 rounded border border-gem-700">
+                  <BrandText inline className="text-xl" />
+                  <span className="bg-slate-800 text-amber-300 text-[10px] font-bold px-2 py-0.5 rounded border border-slate-700">
                     SIH 2026 AI
                   </span>
                 </div>
@@ -82,17 +84,17 @@ export default function LoginPage() {
             <div className="mt-8 text-3xl font-extrabold leading-tight text-white max-w-lg">
               Statutory Bid Compliance Verification Platform for GeM
             </div>
-            <div className="mt-4 text-sm text-slate-300 max-w-lg leading-relaxed">
+            <div className="mt-4 text-sm text-slate-200 max-w-lg leading-relaxed">
               Chennai Petroleum Corporation Limited (CPCL) • Ministry of Petroleum &amp; Natural Gas
             </div>
           </div>
 
           <div className="space-y-6 max-w-lg relative z-10">
-            <div className="text-xs text-slate-300 leading-relaxed bg-white/5 border border-white/10 rounded-xl p-4 backdrop-blur-xs">
+            <div className="text-xs text-slate-200 leading-relaxed bg-white/10 border border-white/20 rounded-xl p-4 backdrop-blur-xs">
               Autonomous multi-registry cross-referencing against sovereign databases (GSTN, PAN, Udyam MSME, EPFO, ESIC, CPPP Debarment).
               AI generates statutory reasoning while the <strong>Procurement Officer retains final adjudication authority</strong>.
             </div>
-            <div className="flex flex-wrap gap-4 text-xs text-slate-400 pt-4 border-t border-white/10">
+            <div className="flex flex-wrap gap-4 text-xs text-slate-300 pt-4 border-t border-white/20">
               <div className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />Deterministic Rule Engine</div>
               <div className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />Live Sovereign Connectors</div>
               <div className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />SHA-256 Tamper Audit Trail</div>
@@ -104,16 +106,16 @@ export default function LoginPage() {
         <div className="lg:col-span-5 flex items-center justify-center p-6 sm:p-12 relative z-10">
           
           {/* Ambient Form Glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[600px] bg-[#00F5FF]/10 rounded-full blur-[120px] pointer-events-none mix-blend-screen" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[600px] bg-[#00F5FF]/15 rounded-full blur-[120px] pointer-events-none mix-blend-screen" />
 
-          <form onSubmit={handleSubmit} className="w-full max-w-md bg-[#0B0F17]/40 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-[0_0_40px_rgba(0,245,255,0.05)] relative">
-            <div className="mb-6 border-b border-white/10 pb-6">
+          <form onSubmit={handleSubmit} className="w-full max-w-md bg-[#0F172A]/60 backdrop-blur-2xl border border-white/20 rounded-3xl p-8 shadow-[0_0_40px_rgba(0,245,255,0.08)] relative">
+            <div className="mb-6 border-b border-white/20 pb-6">
               <div className="flex items-center gap-2 mb-2">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span>
                 <span className="text-[10px] font-bold text-[#00F5FF] uppercase tracking-widest">Secure Officer Access</span>
               </div>
               <h2 className="text-2xl font-black text-white tracking-tight">Procurement Sign In</h2>
-              <p className="text-xs text-slate-400 mt-1">Authenticate to review statutory compliance dossiers</p>
+              <p className="text-xs text-slate-300 mt-1">Authenticate to review statutory compliance dossiers</p>
             </div>
 
             {error && (
@@ -127,9 +129,9 @@ export default function LoginPage() {
 
             <div className="space-y-5">
               <div>
-                <label className="text-[10px] uppercase font-bold tracking-wider text-slate-400 block mb-2">Officer Government Email</label>
+                <label className="text-[10px] uppercase font-bold tracking-wider text-slate-300 block mb-2">Officer Government Email</label>
                 <input
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all focus:border-[#00F5FF]/50 focus:ring-1 focus:ring-[#00F5FF]/50 focus:bg-white/10 shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)]"
+                  className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-400 outline-none transition-all focus:border-[#00F5FF] focus:ring-1 focus:ring-[#00F5FF] focus:bg-white/15 shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)]"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -139,10 +141,10 @@ export default function LoginPage() {
               </div>
 
               <div className="relative">
-                <label className="text-[10px] uppercase font-bold tracking-wider text-slate-400 block mb-2">Password</label>
+                <label className="text-[10px] uppercase font-bold tracking-wider text-slate-300 block mb-2">Password</label>
                 <div className="relative">
                   <input
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 pr-12 text-sm text-white placeholder-slate-500 outline-none transition-all focus:border-[#00F5FF]/50 focus:ring-1 focus:ring-[#00F5FF]/50 focus:bg-white/10 shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)]"
+                    className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 pr-12 text-sm text-white placeholder-slate-400 outline-none transition-all focus:border-[#00F5FF] focus:ring-1 focus:ring-[#00F5FF] focus:bg-white/15 shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)]"
                     type={showPassword ? "text" : "password"}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -185,13 +187,13 @@ export default function LoginPage() {
               ) : busy ? (
                 "Authenticating Credentials…"
               ) : (
-                "Sign In to Copilot"
+                "Sign In to Platform"
               )}
             </button>
 
-            <div className="mt-8 pt-6 border-t border-white/10 text-xs text-slate-400 bg-white/5 p-4 rounded-xl border border-white/5">
+            <div className="mt-8 pt-6 border-t border-white/20 text-xs text-slate-300 bg-white/10 p-4 rounded-xl border border-white/10">
               <span className="font-bold text-white tracking-wide">Prototype Demo Credentials:</span>
-              <div className="font-mono text-slate-300 mt-2 space-y-1">
+              <div className="font-mono text-slate-200 mt-2 space-y-1">
                 <div>Email: <span className="text-[#00F5FF] font-semibold">procurement@cpcl.gov.in</span></div>
                 <div>Password: <span className="text-[#00F5FF] font-semibold">demo123</span></div>
               </div>

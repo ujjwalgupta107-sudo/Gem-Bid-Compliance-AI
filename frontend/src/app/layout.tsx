@@ -6,8 +6,11 @@ import { AuthProvider } from "@/lib/auth";
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-  title: "GeM Bid Compliance Platform | CPCL",
-  description: "AI-Powered Integrated Bid Compliance Verification Platform for GeM Procurement — SIH26100 Prototype",
+  title: {
+    template: "Bid Compliance Platform — %s",
+    default: "Bid Compliance Platform",
+  },
+  description: "AI-Powered Integrated Bid Compliance Verification Platform for GeM Procurement — SIH 2026 AI Prototype",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

@@ -7,6 +7,7 @@ import { LogoIcon } from "@/components/ui/Logo";
 import FeatureOCR3D from "@/components/3d/FeatureOCR3D";
 import FeatureHybridEngine3D from "@/components/3d/FeatureHybridEngine3D";
 import FeatureAuditChain3D from "@/components/3d/FeatureAuditChain3D";
+import { BrandText } from "@/components/ui/BrandText";
 
 export default function LandingPage() {
   const [activeFeature, setActiveFeature] = useState<string | null>(null);
@@ -48,9 +49,9 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <LogoIcon size="md" />
-            <span className="font-bold tracking-tight text-white text-lg hidden sm:block">Git Push Force</span>
+            <BrandText inline className="text-lg hidden sm:block ml-2" />
             <span className="bg-white/10 text-[#00F5FF] text-[10px] font-bold px-2 py-0.5 rounded-full border border-[#00F5FF]/30 ml-2">
-              SIH26100
+              SIH 2026 AI
             </span>
           </div>
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
@@ -61,7 +62,7 @@ export default function LandingPage() {
           </div>
           <div className="flex items-center gap-4">
             <a href="/login" className="bg-[#00F5FF] hover:bg-[#00F5FF]/90 text-slate-900 text-sm font-bold px-5 py-2 rounded-lg shadow-[0_0_15px_rgba(0,245,255,0.4)] transition-all">
-              [ Launch Copilot ]
+              [ Launch Platform ]
             </a>
           </div>
         </div>
@@ -77,8 +78,8 @@ export default function LandingPage() {
           </div>
           
           <h1 className="text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] mb-6">
-            Autonomous GeM Bid<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5FF] to-[#0070F3]">Compliance Verification</span>
+            <span className="text-xl lg:text-2xl font-bold tracking-widest text-slate-300 block mb-4 uppercase">Government e-Marketplace</span>
+            <BrandText className="text-5xl lg:text-6xl" />
           </h1>
           
           <p className="text-lg text-slate-400 mb-10 leading-relaxed max-w-lg">
