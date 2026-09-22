@@ -3,9 +3,10 @@
 @tailwind utilities;
 
 :root {
-  --background: #f4f6f8;
-  --foreground: #131c2b;
-  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", Menlo, Monaco, Consolas, monospace;
 }
 
 body {
@@ -15,35 +16,60 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Custom Scrollbars from Stitch UI */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.code-editor-font {
+  font-family: var(--font-mono);
+}
+
+.donut-chart-circle {
+  transition: stroke-dasharray 0.5s ease;
+}
+
 @layer components {
   .badge {
     @apply inline-flex items-center gap-1.5 rounded px-2 py-0.5 text-[11px] font-semibold tracking-wide uppercase;
   }
-  .badge-verified { @apply bg-status-verifiedBg text-status-verified; }
-  .badge-warning { @apply bg-status-warningBg text-status-warning; }
-  .badge-failed { @apply bg-status-failedBg text-status-failed; }
-  .badge-pending { @apply bg-status-pendingBg text-status-pending; }
-  .badge-na { @apply bg-status-naBg text-status-na; }
+  .badge-verified { @apply bg-emerald-50 text-emerald-700 border border-emerald-200; }
+  .badge-warning { @apply bg-amber-50 text-amber-700 border border-amber-200; }
+  .badge-failed { @apply bg-rose-50 text-rose-700 border border-rose-200; }
+  .badge-pending { @apply bg-slate-100 text-slate-600 border border-slate-200; }
+  .badge-na { @apply bg-slate-50 text-slate-500 border border-slate-200; }
 
-  .risk-low { @apply bg-status-verifiedBg text-status-verified; }
-  .risk-medium { @apply bg-status-warningBg text-status-warning; }
-  .risk-high { @apply bg-status-failedBg text-status-failed; }
+  .risk-low { @apply bg-emerald-50 text-emerald-700 border border-emerald-200; }
+  .risk-medium { @apply bg-amber-50 text-amber-700 border border-amber-200; }
+  .risk-high { @apply bg-rose-50 text-rose-700 border border-rose-200; }
 
   .panel {
-    @apply bg-white border border-slate-200 rounded-md shadow-card;
+    @apply bg-white border border-slate-200 rounded-xl shadow-xs;
   }
   .btn {
-    @apply inline-flex items-center justify-center gap-1.5 rounded-md px-3.5 py-2 text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply inline-flex items-center justify-center gap-1.5 rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed;
   }
-  .btn-primary { @apply btn bg-ink-900 text-white hover:bg-ink-800; }
-  .btn-secondary { @apply btn bg-white border border-slate-300 text-ink-900 hover:bg-slate-50; }
-  .btn-danger { @apply btn bg-status-failed text-white hover:opacity-90; }
-  .btn-ghost { @apply btn text-ink-700 hover:bg-slate-100; }
+  .btn-primary { @apply btn bg-gem-700 text-white hover:bg-gem-800 shadow-xs; }
+  .btn-secondary { @apply btn bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 shadow-2xs; }
+  .btn-success { @apply btn bg-emerald-600 text-white hover:bg-emerald-700 shadow-xs; }
+  .btn-danger { @apply btn bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-200; }
+  .btn-ghost { @apply btn text-slate-600 hover:bg-slate-100 hover:text-slate-900; }
 
   .input {
-    @apply w-full rounded-md border border-slate-300 px-3 py-2 text-sm outline-none focus:border-ink-600 focus:ring-1 focus:ring-ink-600;
+    @apply w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800 placeholder-slate-400 outline-none transition focus:border-gem-600 focus:ring-1 focus:ring-gem-600;
   }
   .label-sm {
-    @apply text-[11px] font-semibold uppercase tracking-wide text-slate-500;
+    @apply text-xs font-semibold uppercase tracking-wider text-slate-500;
   }
 }

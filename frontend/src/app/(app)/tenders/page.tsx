@@ -63,14 +63,17 @@ export default function TendersPage() {
   }, [tenders]);
 
   return (
-    <div className="p-8 max-w-[1400px]">
-      <div className="flex items-center justify-between mb-6">
+    <div className="space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-xl font-semibold text-ink-900">Tenders</h1>
-          <p className="text-sm text-slate-500 mt-1">GeM procurement tenders under CPCL evaluation.</p>
+          <h1 className="text-2xl font-bold text-slate-900 tracking-tight">GeM Procurement Tenders</h1>
+          <p className="text-sm text-slate-500 mt-0.5">Active CPCL procurement notices under statutory AI evaluation</p>
         </div>
         <button className="btn-primary" onClick={() => setShowCreate(true)}>
-          + New Tender
+          <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M12 4v16m8-8H4" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+          </svg>
+          New Tender
         </button>
       </div>
 

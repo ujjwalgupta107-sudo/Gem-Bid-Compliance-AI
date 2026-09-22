@@ -26,19 +26,19 @@ export default function TenderDetailPage() {
   const days = daysUntil(tender.closing_date);
 
   return (
-    <div className="p-8 max-w-[1400px]">
-      <div className="flex items-start justify-between mb-6">
+    <div className="space-y-6">
+      <div className="flex items-start justify-between">
         <div>
           <div className="text-xs font-mono text-slate-500">{tender.tender_number}</div>
-          <h1 className="text-xl font-semibold text-ink-900 mt-1">{tender.title}</h1>
-          <div className="flex items-center gap-3 mt-2 text-sm text-slate-500">
-            <span>{tender.organization}</span>
+          <h1 className="text-2xl font-bold text-slate-900 tracking-tight mt-1">{tender.title}</h1>
+          <div className="flex items-center gap-3 mt-2 text-xs text-slate-500">
+            <span className="font-semibold text-slate-700">{tender.organization}</span>
             <span>·</span>
             <span className="text-xs font-medium px-1.5 py-0.5 rounded bg-slate-100 text-slate-600">{tender.category}</span>
             <span>·</span>
             <span>Closing {formatDate(tender.closing_date)}</span>
             {days !== null && days >= 0 && (
-              <span className={`text-xs font-medium px-1.5 py-0.5 rounded ${days <= 7 ? "bg-status-failedBg text-status-failed" : days <= 15 ? "bg-status-warningBg text-status-warning" : "text-slate-500"}`}>
+              <span className={`text-xs font-medium px-1.5 py-0.5 rounded ${days <= 7 ? "bg-rose-50 text-rose-700" : days <= 15 ? "bg-amber-50 text-amber-700" : "text-slate-500"}`}>
                 {days === 0 ? "Closes today" : `${days}d left`}
               </span>
             )}
@@ -49,18 +49,18 @@ export default function TenderDetailPage() {
         <button className="btn-primary" onClick={() => setShowAddBidder(true)}>+ Register Bid</button>
       </div>
 
-      <div className="flex gap-1 border-b border-slate-200 mb-6 overflow-x-auto">
+      <div className="flex gap-1 border-b border-slate-200 overflow-x-auto">
         {TABS.map((t) => (
           <button
             key={t}
             onClick={() => setTab(t)}
-            className={`px-3.5 py-2.5 text-sm font-medium whitespace-nowrap border-b-2 -mb-px ${
-              tab === t ? "border-ink-900 text-ink-900" : "border-transparent text-slate-500 hover:text-ink-700"
+            className={`px-3.5 py-2.5 text-xs font-semibold whitespace-nowrap border-b-2 -mb-px transition ${
+              tab === t ? "border-gem-700 text-gem-700 font-bold" : "border-transparent text-slate-500 hover:text-slate-900"
             }`}
           >
             {t}
             {t === "Bidders" && tender.bids && tender.bids.length > 0 && (
-              <span className="ml-1.5 text-xs text-slate-400">{tender.bids.length}</span>
+              <span className="ml-1.5 text-xs text-slate-400">({tender.bids.length})</span>
             )}
           </button>
         ))}
