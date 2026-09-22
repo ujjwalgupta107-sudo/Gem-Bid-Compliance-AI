@@ -149,6 +149,7 @@ export function HeroNetwork3D({ onSelectNode }: HeroNetwork3DProps) {
     pulseSpheresRef.current = [];
 
     const group = new THREE.Group();
+    group.position.x = 2.5; // Shifted right so it doesn't overlap text
     scene.add(group);
 
     // Build Nodes

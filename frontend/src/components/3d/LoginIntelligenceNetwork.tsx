@@ -36,6 +36,19 @@ export default function LoginIntelligenceNetwork() {
     particlesRef.current = [];
 
     const group = new THREE.Group();
+    
+    // Shift slightly to the right to clear left-side text, but keep it in the frustum
+    // and scale down slightly so it doesn't hit the right edge.
+    // Use window.innerWidth to make it responsive inside Three.js
+    const isMobile = window.innerWidth < 1024;
+    if (!isMobile) {
+      group.position.x = 3.7; // Shifted further right (approx. 30-50px extra) to provide breathing space while maintaining safe gap to login card
+      group.scale.set(0.85, 0.85, 0.85);
+    } else {
+      group.position.x = 0;
+      group.scale.set(0.9, 0.9, 0.9);
+    }
+    
     scene.add(group);
     groupRef.current = group;
 
@@ -210,7 +223,11 @@ export default function LoginIntelligenceNetwork() {
   };
 
   return (
-    <div className="absolute inset-0 z-0" onPointerMove={handlePointerMove} onPointerLeave={handlePointerLeave}>
+    <div 
+      className="relative h-[300px] sm:h-[400px] w-full my-8 lg:my-0 lg:h-auto lg:absolute lg:inset-0 z-0 pointer-events-auto opacity-90 lg:opacity-100 flex-shrink-0" 
+      onPointerMove={handlePointerMove} 
+      onPointerLeave={handlePointerLeave}
+    >
       <SpatialCanvas
         onSceneReady={handleSceneReady}
         onRenderFrame={handleRenderFrame}

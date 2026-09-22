@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { api } from "@/lib/api";
 import { DashboardSummary } from "@/lib/types";
+import ComplianceIntelligenceCore3D from "@/components/3d/ComplianceIntelligenceCore3D";
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -161,89 +162,91 @@ export default function DashboardPage() {
             ))}
           </div>
 
-          {/* COMPLIANCE STATUS + CONNECTORS */}
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 animate-fade-in-up delay-200">
-            {/* COMPLIANCE DONUT CHART */}
-            <div className="lg:col-span-3 bg-[#0F172A]/40 backdrop-blur-md rounded-2xl border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.2)] p-6 hover:border-white/20 transition-colors">
-              <h2 className="text-base font-bold text-white mb-6 flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#00F5FF]"></span>
-                Compliance Status Distribution
-              </h2>
-              <div className="flex flex-col md:flex-row items-center gap-8">
-                <div className="relative w-44 h-44 shrink-0">
-                  <svg viewBox="0 0 36 36" className="w-full h-full -rotate-90">
-                    <path className="text-white/5" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeWidth="3" />
-                    <path className="text-emerald-400 drop-shadow-[0_0_3px_rgba(52,211,153,0.5)]" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeDasharray={`${passRate}, 100`} strokeLinecap="round" strokeWidth="3" />
-                    <path className="text-amber-400 drop-shadow-[0_0_3px_rgba(251,191,36,0.5)]" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeDasharray={`${reviewRate}, 100`} strokeDashoffset={`-${passRate}`} strokeWidth="3" />
-                    <path className="text-rose-500 drop-shadow-[0_0_3px_rgba(244,63,94,0.5)]" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeDasharray={`${failRate}, 100`} strokeDashoffset={`-${parseFloat(passRate) + parseFloat(reviewRate)}`} strokeWidth="3" />
-                  </svg>
-                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                    <span className="text-3xl font-black text-white">{totalBids}</span>
-                    <span className="text-[10px] uppercase font-bold tracking-wider text-slate-300 mt-1">Total Bids</span>
+          {/* COMPLIANCE STATUS + 3D COMMAND CENTER */}
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 animate-fade-in-up delay-200">
+            
+            {/* LEFT COLUMN: DONUT & CONNECTORS TEXT */}
+            <div className="xl:col-span-1 flex flex-col gap-6">
+              
+              {/* COMPLIANCE DONUT CHART */}
+              <div className="bg-[#0F172A]/40 backdrop-blur-md rounded-2xl border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.2)] p-6 hover:border-white/20 transition-colors h-full flex flex-col">
+                <h2 className="text-base font-bold text-white mb-6 flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#00F5FF]"></span>
+                  Compliance Status
+                </h2>
+                <div className="flex flex-col items-center gap-6">
+                  <div className="relative w-40 h-40 shrink-0">
+                    <svg viewBox="0 0 36 36" className="w-full h-full -rotate-90">
+                      <path className="text-white/5" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeWidth="3" />
+                      <path className="text-emerald-400 drop-shadow-[0_0_3px_rgba(52,211,153,0.5)]" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeDasharray={`${passRate}, 100`} strokeLinecap="round" strokeWidth="3" />
+                      <path className="text-amber-400 drop-shadow-[0_0_3px_rgba(251,191,36,0.5)]" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeDasharray={`${reviewRate}, 100`} strokeDashoffset={`-${passRate}`} strokeWidth="3" />
+                      <path className="text-rose-500 drop-shadow-[0_0_3px_rgba(244,63,94,0.5)]" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeDasharray={`${failRate}, 100`} strokeDashoffset={`-${parseFloat(passRate) + parseFloat(reviewRate)}`} strokeWidth="3" />
+                    </svg>
+                    <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+                      <span className="text-3xl font-black text-white">{totalBids}</span>
+                      <span className="text-[10px] uppercase font-bold tracking-wider text-slate-300 mt-1">Total Bids</span>
+                    </div>
+                  </div>
+                  <div className="space-y-3 text-sm font-medium w-full">
+                    <Link href="/matrix?status=PASS" className="flex justify-between items-center bg-emerald-500/10 p-3.5 rounded-xl border border-emerald-500/20 hover:bg-emerald-500/20 hover:border-emerald-500/40 transition cursor-pointer group">
+                      <span className="flex items-center gap-2 text-emerald-400 group-hover:text-emerald-300 transition-colors"><svg className="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" /></svg> Compliant</span>
+                      <span className="font-bold text-white">{compliantCount} <span className="text-emerald-400/80 ml-1 font-normal">({passRate}%)</span></span>
+                    </Link>
+                    <Link href="/matrix?status=REVIEW" className="flex justify-between items-center bg-amber-500/10 p-3.5 rounded-xl border border-amber-500/20 hover:bg-amber-500/20 hover:border-amber-500/40 transition cursor-pointer group">
+                      <span className="flex items-center gap-2 text-amber-400 group-hover:text-amber-300 transition-colors">
+                        <svg className="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-2h2v2h-2zm0-4V7h2v6h-2z"/>
+                        </svg> 
+                        Under Review
+                      </span>
+                      <span className="font-bold text-white">{reviewCount} <span className="text-amber-400/80 ml-1 font-normal">({reviewRate}%)</span></span>
+                    </Link>
+                    <Link href="/matrix?status=FAIL" className="flex justify-between items-center bg-rose-500/10 p-3.5 rounded-xl border border-rose-500/20 hover:bg-rose-500/20 hover:border-rose-500/40 transition cursor-pointer group">
+                      <span className="flex items-center gap-2 text-rose-400 group-hover:text-rose-300 transition-colors"><svg className="w-4 h-4 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg> Flagged</span>
+                      <span className="font-bold text-white">{nonCompliantCount} <span className="text-rose-400/80 ml-1 font-normal">({failRate}%)</span></span>
+                    </Link>
                   </div>
                 </div>
-                <div className="space-y-3 text-sm font-medium flex-1 w-full">
-                  <Link href="/matrix?status=PASS" className="flex justify-between items-center bg-emerald-500/10 p-3.5 rounded-xl border border-emerald-500/20 hover:bg-emerald-500/20 hover:border-emerald-500/40 transition cursor-pointer group">
-                    <span className="flex items-center gap-2 text-emerald-400 group-hover:text-emerald-300 transition-colors"><svg className="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" /></svg> Compliant</span>
-                    <span className="font-bold text-white">{compliantCount} <span className="text-emerald-400/80 ml-1 font-normal">({passRate}%)</span></span>
-                  </Link>
-                  <Link href="/matrix?status=REVIEW" className="flex justify-between items-center bg-amber-500/10 p-3.5 rounded-xl border border-amber-500/20 hover:bg-amber-500/20 hover:border-amber-500/40 transition cursor-pointer group">
-                    <span className="flex items-center gap-2 text-amber-400 group-hover:text-amber-300 transition-colors">
-                      <svg className="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-2h2v2h-2zm0-4V7h2v6h-2z"/>
-                      </svg> 
-                      Under Review
+              </div>
+              
+              {/* GOVERNMENT CONNECTORS STATUS (Compact) */}
+              <div className="bg-[#0F172A]/40 backdrop-blur-md rounded-2xl border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.2)] overflow-hidden flex flex-col hover:border-white/20 transition-colors">
+                <div className="p-4 border-b border-white/10 flex justify-between items-center bg-white/5">
+                  <h2 className="text-sm font-bold text-white">Registries</h2>
+                  <div className="flex items-center gap-2 text-[9px] uppercase tracking-wider font-bold px-2 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-md">
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
                     </span>
-                    <span className="font-bold text-white">{reviewCount} <span className="text-amber-400/80 ml-1 font-normal">({reviewRate}%)</span></span>
-                  </Link>
-                  <Link href="/matrix?status=FAIL" className="flex justify-between items-center bg-rose-500/10 p-3.5 rounded-xl border border-rose-500/20 hover:bg-rose-500/20 hover:border-rose-500/40 transition cursor-pointer group">
-                    <span className="flex items-center gap-2 text-rose-400 group-hover:text-rose-300 transition-colors"><svg className="w-4 h-4 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg> Flagged</span>
-                    <span className="font-bold text-white">{nonCompliantCount} <span className="text-rose-400/80 ml-1 font-normal">({failRate}%)</span></span>
-                  </Link>
+                    Live
+                  </div>
+                </div>
+                <div className="flex-1 divide-y divide-white/5">
+                  {[
+                    { code: "UDYAM", status: "Operational", color: "text-emerald-400", bg: "bg-emerald-500/10", border: "border-emerald-500/20" },
+                    { code: "GSTN", status: "Operational", color: "text-emerald-400", bg: "bg-emerald-500/10", border: "border-emerald-500/20" },
+                    { code: "PAN", status: "Operational", color: "text-emerald-400", bg: "bg-emerald-500/10", border: "border-emerald-500/20" },
+                    { code: "CPPP", status: "Degraded", color: "text-amber-400", bg: "bg-amber-500/10", border: "border-amber-500/20" },
+                  ].map((conn) => (
+                    <button key={conn.code} onClick={() => router.push('/government-connectors')} className="w-full flex items-center justify-between px-4 py-3 hover:bg-white/5 transition-colors text-left group">
+                      <div className="flex items-center gap-3">
+                        <div className={`w-8 h-8 rounded-md flex items-center justify-center font-mono text-[9px] font-bold border ${conn.bg} ${conn.color} ${conn.border} group-hover:scale-105 transition-transform`}>
+                          {conn.code}
+                        </div>
+                        <p className="text-xs font-semibold text-white group-hover:text-[#00F5FF] transition-colors">{conn.code}</p>
+                      </div>
+                      <span className={`w-1.5 h-1.5 rounded-full ${conn.color === 'text-emerald-400' ? 'bg-emerald-400 shadow-[0_0_5px_rgba(52,211,153,0.8)]' : 'bg-amber-400 shadow-[0_0_5px_rgba(251,191,36,0.8)]'}`}></span>
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
 
-            {/* GOVERNMENT CONNECTORS STATUS */}
-            <div className="lg:col-span-2 bg-[#0F172A]/40 backdrop-blur-md rounded-2xl border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.2)] overflow-hidden flex flex-col hover:border-white/20 transition-colors">
-              <div className="p-5 border-b border-white/10 flex justify-between items-center bg-white/5">
-                <div>
-                  <h2 className="text-base font-bold text-white">Government Connectors</h2>
-                  <p className="text-xs text-slate-300 mt-0.5">Registry health status</p>
-                </div>
-                <div className="flex items-center gap-2 text-[10px] uppercase tracking-wider font-bold px-3 py-1.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-lg">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                  </span>
-                  Operational
-                </div>
-              </div>
-              <div className="flex-1 divide-y divide-white/5">
-                {[
-                  { name: "Udyam (MSME)", code: "UDYAM", status: "Operational", color: "text-emerald-400", bg: "bg-emerald-500/10", border: "border-emerald-500/20", sync: "2 mins ago" },
-                  { name: "GSTN", code: "GST", status: "Operational", color: "text-emerald-400", bg: "bg-emerald-500/10", border: "border-emerald-500/20", sync: "5 mins ago" },
-                  { name: "Income Tax (PAN)", code: "PAN", status: "Operational", color: "text-emerald-400", bg: "bg-emerald-500/10", border: "border-emerald-500/20", sync: "10 mins ago" },
-                  { name: "CPPP API", code: "CPPP", status: "Degraded", color: "text-amber-400", bg: "bg-amber-500/10", border: "border-amber-500/20", sync: "1 hour ago" },
-                ].map((conn) => (
-                  <button key={conn.code} onClick={() => router.push('/government-connectors')} className="w-full flex items-center justify-between px-5 py-4 hover:bg-white/5 transition-colors text-left group">
-                    <div className="flex items-center gap-4">
-                      <div className={`w-9 h-9 rounded-lg flex items-center justify-center font-mono text-[10px] font-bold border ${conn.bg} ${conn.color} ${conn.border} group-hover:scale-105 transition-transform`}>
-                        {conn.code}
-                      </div>
-                      <div>
-                        <p className="text-sm font-semibold text-white group-hover:text-[#00F5FF] transition-colors">{conn.name}</p>
-                        <p className="text-[10px] text-slate-300 font-mono mt-0.5">{conn.sync}</p>
-                      </div>
-                    </div>
-                    <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wider border ${conn.bg} ${conn.color} ${conn.border}`}>
-                      <span className={`w-1.5 h-1.5 rounded-full ${conn.color === 'text-emerald-400' ? 'bg-emerald-400 shadow-[0_0_5px_rgba(52,211,153,0.8)]' : 'bg-amber-400 shadow-[0_0_5px_rgba(251,191,36,0.8)]'}`}></span>
-                      {conn.status}
-                    </span>
-                  </button>
-                ))}
-              </div>
+            {/* RIGHT COLUMN: 3D INTELLIGENCE CORE */}
+            <div className="xl:col-span-2 flex flex-col h-full">
+               <ComplianceIntelligenceCore3D />
             </div>
+
           </div>
 
           {/* RECENT ACTIVITY FEED */}

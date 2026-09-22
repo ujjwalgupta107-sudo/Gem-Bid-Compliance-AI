@@ -17,6 +17,7 @@ export default function DashboardMockup3D() {
     // Angle the whole mockup
     group.rotation.x = -Math.PI * 0.15;
     group.rotation.y = -Math.PI * 0.1;
+    group.position.x = 1.8; // Shifted right for better visibility
     group.position.z = 0;
 
     // 1. Dashboard Base / Document Plane

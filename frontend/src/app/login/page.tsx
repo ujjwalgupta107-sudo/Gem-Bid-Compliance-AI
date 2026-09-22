@@ -52,8 +52,7 @@ export default function LoginPage() {
 
       <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 min-h-screen relative z-10">
         {/* Left Branding Panel */}
-        <div className="hidden lg:flex lg:col-span-7 flex-col justify-between p-12 lg:p-16 relative overflow-hidden">
-          <LoginIntelligenceNetwork />
+        <div className="flex lg:col-span-7 flex-col justify-between p-8 pt-20 sm:p-12 lg:p-16 relative overflow-hidden min-h-[500px] lg:min-h-0">
           <div className="absolute inset-0 bg-[#0F172A]/20 pointer-events-none" />
 
           <div className="relative z-10 flex flex-col items-start gap-6">
@@ -88,6 +87,9 @@ export default function LoginPage() {
               Chennai Petroleum Corporation Limited (CPCL) • Ministry of Petroleum &amp; Natural Gas
             </div>
           </div>
+          
+          {/* Inserted here to stack naturally on mobile between the header text and footer cards */}
+          <LoginIntelligenceNetwork />
 
           <div className="space-y-6 max-w-lg relative z-10">
             <div className="text-xs text-slate-200 leading-relaxed bg-white/10 border border-white/20 rounded-xl p-4 backdrop-blur-xs">
