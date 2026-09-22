@@ -165,29 +165,29 @@ export function Shell({ children }: { children: React.ReactNode }) {
   })();
 
   return (
-    <div className="bg-[#f8fafc] text-slate-800 antialiased min-h-screen flex flex-col font-sans">
+    <div className="bg-[#0B0F17] text-white antialiased min-h-screen flex flex-col font-sans selection:bg-[#00F5FF] selection:text-black">
       {/* Command Palette */}
       <CommandPalette isOpen={isCommandOpen} onClose={() => setIsCommandOpen(false)} />
 
       {/* TopHeader */}
-      <header className="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-xs h-16 flex items-center shrink-0">
+      <header className="bg-[#0B0F17]/80 backdrop-blur-md border-b border-white/10 sticky top-0 z-40 h-16 flex items-center shrink-0">
         <div className="w-full flex items-center justify-between px-4 lg:px-6">
           <div className="flex items-center gap-4 flex-1">
             <button
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-              className="p-1.5 rounded-lg text-slate-500 hover:bg-slate-100 lg:hidden"
+              className="p-1.5 rounded-lg text-slate-400 hover:bg-white/10 hover:text-white transition-colors lg:hidden"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
             {/* Breadcrumb */}
-            <div className="hidden sm:flex items-center text-sm font-medium text-slate-500 gap-2">
-              <Link href="/dashboard" className="hover:text-slate-800 transition">Dashboard</Link>
+            <div className="hidden sm:flex items-center text-sm font-medium text-slate-400 gap-2">
+              <Link href="/dashboard" className="hover:text-white transition-colors">Dashboard</Link>
               {pathname !== "/dashboard" && (
                 <>
-                  <span className="text-slate-300">/</span>
-                  <span className="text-slate-800 font-semibold">{breadcrumbLabel}</span>
+                  <span className="text-white/20">/</span>
+                  <span className="text-white font-semibold">{breadcrumbLabel}</span>
                 </>
               )}
             </div>
@@ -197,41 +197,41 @@ export function Shell({ children }: { children: React.ReactNode }) {
           <div className="flex-1 max-w-xl hidden md:block">
             <button
               onClick={() => setIsCommandOpen(true)}
-              className="w-full flex items-center gap-3 bg-slate-50 hover:bg-slate-100 text-sm text-slate-400 pl-10 pr-24 py-2 rounded-xl border border-slate-200 transition outline-none shadow-2xs relative text-left"
+              className="w-full flex items-center gap-3 bg-white/5 hover:bg-white/10 text-sm text-slate-400 pl-10 pr-24 py-2 rounded-xl border border-white/10 transition outline-none relative text-left focus:border-[#00F5FF]/50"
             >
-              <svg className="w-4 h-4 absolute left-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 absolute left-3 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
               Search tenders, bidders, GSTIN, PAN, Udyam…
-              <span className="absolute right-2.5 text-[11px] font-mono text-slate-400 border border-slate-200 rounded px-1.5 py-0.5 bg-white shadow-2xs">
+              <span className="absolute right-2.5 text-[11px] font-mono text-slate-400 border border-white/10 rounded px-1.5 py-0.5 bg-white/5">
                 Ctrl + K
               </span>
             </button>
           </div>
 
           <div className="flex items-center gap-3 flex-1 justify-end">
-            <button className="relative p-2 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition" aria-label="Notifications">
+            <button className="relative p-2 text-slate-400 hover:text-[#00F5FF] hover:bg-white/5 rounded-lg transition-colors" aria-label="Notifications">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
               </svg>
-              <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-rose-500 ring-2 ring-white"></span>
+              <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-rose-500 ring-2 ring-[#0B0F17]"></span>
             </button>
-            <button className="p-2 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition hidden sm:block" aria-label="Help">
+            <button className="p-2 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors hidden sm:block" aria-label="Help">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </button>
-            <div className="h-6 w-px bg-slate-200 hidden sm:block"></div>
+            <div className="h-6 w-px bg-white/10 hidden sm:block"></div>
             
-            <div className="flex items-center gap-2 cursor-pointer group rounded-lg hover:bg-slate-50 p-1 pr-2 transition">
-              <div className="w-8 h-8 rounded-full bg-gem-900 text-white font-bold flex items-center justify-center text-xs shadow-xs group-hover:ring-2 ring-blue-100 transition">
+            <div className="flex items-center gap-2 cursor-pointer group rounded-lg hover:bg-white/5 p-1 pr-2 transition-colors">
+              <div className="w-8 h-8 rounded-full bg-[#0070F3]/20 border border-[#0070F3]/50 text-[#00F5FF] font-bold flex items-center justify-center text-xs shadow-xs group-hover:shadow-[0_0_10px_rgba(0,112,243,0.5)] transition-shadow">
                 {user?.full_name?.charAt(0) || "P"}
               </div>
               <div className="hidden lg:block text-left">
-                <p className="text-xs font-bold text-slate-800">{user?.full_name || "Procurement Officer"}</p>
-                <p className="text-[10px] text-slate-500">{user?.organization || "CPCL"}</p>
+                <p className="text-xs font-bold text-white group-hover:text-[#00F5FF] transition-colors">{user?.full_name || "Procurement Officer"}</p>
+                <p className="text-[10px] text-slate-400">{user?.organization || "CPCL"}</p>
               </div>
-              <svg className="w-4 h-4 text-slate-400 hidden lg:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-slate-500 group-hover:text-[#00F5FF] hidden lg:block transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
               </svg>
             </div>
@@ -241,9 +241,9 @@ export function Shell({ children }: { children: React.ReactNode }) {
 
       <div className="flex-1 flex overflow-hidden">
         {/* LeftSidebar */}
-        <aside className={`${isSidebarCollapsed ? 'w-[72px]' : 'w-72'} bg-white border-r border-slate-200 flex flex-col shrink-0 transition-all duration-300 z-30 absolute lg:relative lg:translate-x-0 h-[calc(100vh-4rem)] ${isSidebarOpen ? "translate-x-0 shadow-2xl lg:shadow-none" : "-translate-x-full"}`}>
+        <aside className={`${isSidebarCollapsed ? 'w-[72px]' : 'w-72'} bg-[#070B12] border-r border-white/10 flex flex-col shrink-0 transition-all duration-300 z-30 absolute lg:relative lg:translate-x-0 h-[calc(100vh-4rem)] ${isSidebarOpen ? "translate-x-0 shadow-2xl lg:shadow-none" : "-translate-x-full"}`}>
           {/* Logo */}
-          <div className="p-4 border-b border-slate-100">
+          <div className="p-4 border-b border-white/5">
             {isSidebarCollapsed ? (
               <Link href="/dashboard" className="flex justify-center">
                 <LogoIcon size="md" />
@@ -258,7 +258,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
           {/* Collapse toggle (desktop only) */}
           <button
             onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
-            className="hidden lg:flex absolute -right-3 top-20 w-6 h-6 bg-white border border-slate-200 rounded-full items-center justify-center text-slate-400 hover:text-slate-600 shadow-sm z-40 transition"
+            className="hidden lg:flex absolute -right-3 top-20 w-6 h-6 bg-[#0B0F17] border border-white/20 rounded-full items-center justify-center text-slate-400 hover:text-[#00F5FF] hover:border-[#00F5FF]/50 shadow-[0_0_10px_rgba(0,0,0,0.5)] z-40 transition-colors"
             aria-label={isSidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
           >
             <svg className={`w-3 h-3 transition-transform ${isSidebarCollapsed ? '' : 'rotate-180'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -280,18 +280,18 @@ export function Shell({ children }: { children: React.ReactNode }) {
                         key={item.href}
                         href={item.href}
                         title={isSidebarCollapsed ? item.label : undefined}
-                        className={`group flex items-center ${isSidebarCollapsed ? 'justify-center' : ''} gap-3 px-3 py-2 text-sm font-medium rounded-lg transition relative overflow-hidden ${
+                        className={`group flex items-center ${isSidebarCollapsed ? 'justify-center' : ''} gap-3 px-3 py-2 text-sm font-medium rounded-lg transition-all relative overflow-hidden ${
                           active
-                            ? "bg-blue-50/80 text-gem-700 shadow-sm"
-                            : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                            ? "bg-[#00F5FF]/10 text-white shadow-[inset_0_0_10px_rgba(0,245,255,0.05)] border border-[#00F5FF]/20"
+                            : "text-slate-400 hover:bg-white/5 hover:text-white border border-transparent"
                         }`}
                       >
-                        {active && <div className="absolute left-0 top-0 bottom-0 w-1 bg-gem-600 rounded-r-full"></div>}
-                        <span className={`${active ? "text-gem-600" : "text-slate-400 group-hover:text-slate-600"} transition-colors`}>{item.icon}</span>
+                        {active && <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#00F5FF] rounded-r-full shadow-[0_0_10px_rgba(0,245,255,0.8)]"></div>}
+                        <span className={`${active ? "text-[#00F5FF]" : "text-slate-500 group-hover:text-[#00F5FF]"} transition-colors`}>{item.icon}</span>
                         {!isSidebarCollapsed && <span className="truncate">{item.label}</span>}
                         {!isSidebarCollapsed && "badge" in item && item.badge && (
                           <span className={`ml-auto text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider ${
-                            active ? "bg-white text-gem-700 shadow-xs" : "bg-slate-100 text-slate-500"
+                            active ? "bg-[#00F5FF]/20 text-[#00F5FF] border border-[#00F5FF]/30" : "bg-white/5 text-slate-400"
                           }`}>
                             {item.badge}
                           </span>
@@ -310,20 +310,20 @@ export function Shell({ children }: { children: React.ReactNode }) {
             ))}
           </div>
 
-          <div className={`p-4 border-t border-slate-100 bg-slate-50 mt-auto ${isSidebarCollapsed ? 'px-2' : ''}`}>
+          <div className={`p-4 border-t border-white/5 bg-[#070B12] mt-auto ${isSidebarCollapsed ? 'px-2' : ''}`}>
             {!isSidebarCollapsed && (
               <div className="flex items-center gap-2 mb-3">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
                 </span>
-                <span className="text-xs font-semibold text-slate-600">All Systems Operational</span>
+                <span className="text-xs font-semibold text-slate-400">Systems Operational</span>
               </div>
             )}
             <button
               onClick={logout}
               title={isSidebarCollapsed ? "Sign Out" : undefined}
-              className="w-full flex items-center justify-center gap-2 px-3 py-2 text-xs font-bold rounded-lg bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-rose-600 transition shadow-xs"
+              className="w-full flex items-center justify-center gap-2 px-3 py-2 text-xs font-bold rounded-lg bg-white/5 border border-white/10 text-slate-300 hover:bg-rose-500/10 hover:text-rose-400 hover:border-rose-500/30 transition-all shadow-xs"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -335,14 +335,16 @@ export function Shell({ children }: { children: React.ReactNode }) {
 
         {isSidebarOpen && (
           <div 
-            className="fixed inset-0 bg-slate-900/20 z-20 lg:hidden backdrop-blur-sm transition-opacity" 
+            className="fixed inset-0 bg-black/60 z-20 lg:hidden backdrop-blur-sm transition-opacity" 
             onClick={() => setIsSidebarOpen(false)}
           />
         )}
 
         {/* Main Content */}
-        <main className="flex-1 overflow-y-auto bg-[#f8fafc] p-4 sm:p-6 lg:p-8">
-          <div className="max-w-[1400px] mx-auto animate-fade-in">
+        <main className="flex-1 overflow-y-auto bg-transparent p-4 sm:p-6 lg:p-8 relative">
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none opacity-30 mix-blend-screen" />
+          
+          <div className="max-w-[1400px] mx-auto animate-fade-in relative z-10">
             {children}
           </div>
         </main>

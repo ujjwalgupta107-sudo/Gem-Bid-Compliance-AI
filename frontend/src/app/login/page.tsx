@@ -44,18 +44,25 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 relative">
+    <div className="min-h-screen flex flex-col bg-[#0B0F17] text-white relative overflow-hidden">
       {/* Top Tricolor Accent Line */}
       <div className="h-1.5 w-full bg-gradient-to-r from-amber-500 via-white to-emerald-600 fixed top-0 left-0 right-0 z-50"></div>
 
-      <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 min-h-screen">
+      <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 min-h-screen relative z-10">
         {/* Left Branding Panel */}
-        <div className="hidden lg:flex lg:col-span-7 flex-col justify-between bg-gem-950 text-white p-12 lg:p-16 relative overflow-hidden">
+        <div className="hidden lg:flex lg:col-span-7 flex-col justify-between p-12 lg:p-16 relative overflow-hidden">
           <LoginIntelligenceNetwork />
-          <div className="absolute inset-0 bg-gem-950/20 pointer-events-none" />
+          <div className="absolute inset-0 bg-[#0B0F17]/20 pointer-events-none" />
 
-          <div className="relative z-10">
-            <div className="flex items-center gap-3 mb-6">
+          <div className="relative z-10 flex flex-col items-start gap-6">
+            <a href="/" className="inline-flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-[#00F5FF] transition-colors bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg backdrop-blur-sm">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              Back to Home
+            </a>
+            
+            <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-gem-900 flex items-center justify-center text-amber-400 font-bold shadow-sm ring-1 ring-gem-700">
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2C10.9 2 10 2.9 10 4V6H14V4C14 2.9 13.1 2 12 2M6 8V10C6 11.1 6.9 12 8 12H9V18H7V20H17V18H15V12H16C17.1 12 18 11.1 18 10V8H6M12 7C12.55 7 13 7.45 13 8C13 8.55 12.55 9 12 9C11.45 9 11 8.55 11 8C11 7.45 11.45 7 12 7Z" />
@@ -94,31 +101,35 @@ export default function LoginPage() {
         </div>
 
         {/* Right Form Panel */}
-        <div className="lg:col-span-5 flex items-center justify-center p-6 sm:p-12">
-          <form onSubmit={handleSubmit} className="w-full max-w-md bg-white border border-slate-200 rounded-2xl p-8 shadow-panel">
-            <div className="mb-6">
-              <div className="flex items-center gap-2 mb-1">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wide">Secure Officer Access</span>
+        <div className="lg:col-span-5 flex items-center justify-center p-6 sm:p-12 relative z-10">
+          
+          {/* Ambient Form Glow */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[600px] bg-[#00F5FF]/10 rounded-full blur-[120px] pointer-events-none mix-blend-screen" />
+
+          <form onSubmit={handleSubmit} className="w-full max-w-md bg-[#0B0F17]/40 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-[0_0_40px_rgba(0,245,255,0.05)] relative">
+            <div className="mb-6 border-b border-white/10 pb-6">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span>
+                <span className="text-[10px] font-bold text-[#00F5FF] uppercase tracking-widest">Secure Officer Access</span>
               </div>
-              <h2 className="text-xl font-bold text-slate-900 tracking-tight">Procurement Officer Sign In</h2>
-              <p className="text-xs text-slate-500 mt-1">Authenticate to review statutory compliance dossiers</p>
+              <h2 className="text-2xl font-black text-white tracking-tight">Procurement Sign In</h2>
+              <p className="text-xs text-slate-400 mt-1">Authenticate to review statutory compliance dossiers</p>
             </div>
 
             {error && (
-              <div className="mb-4 text-xs text-rose-700 bg-rose-50 border border-rose-200 rounded-lg px-3 py-2.5 flex items-center gap-2">
+              <div className="mb-6 text-xs text-rose-400 bg-rose-500/10 border border-rose-500/20 rounded-xl px-4 py-3 flex items-center gap-3 backdrop-blur-sm shadow-[0_0_15px_rgba(244,63,94,0.15)]">
                 <svg className="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                 </svg>
-                <span>{error}</span>
+                <span className="font-medium">{error}</span>
               </div>
             )}
 
-            <div className="space-y-4">
+            <div className="space-y-5">
               <div>
-                <label className="label-sm block mb-1.5">Officer Government Email</label>
+                <label className="text-[10px] uppercase font-bold tracking-wider text-slate-400 block mb-2">Officer Government Email</label>
                 <input
-                  className="input text-xs"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition-all focus:border-[#00F5FF]/50 focus:ring-1 focus:ring-[#00F5FF]/50 focus:bg-white/10 shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)]"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -128,10 +139,10 @@ export default function LoginPage() {
               </div>
 
               <div className="relative">
-                <label className="label-sm block mb-1.5">Password</label>
+                <label className="text-[10px] uppercase font-bold tracking-wider text-slate-400 block mb-2">Password</label>
                 <div className="relative">
                   <input
-                    className="input text-xs pr-10"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 pr-12 text-sm text-white placeholder-slate-500 outline-none transition-all focus:border-[#00F5FF]/50 focus:ring-1 focus:ring-[#00F5FF]/50 focus:bg-white/10 shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)]"
                     type={showPassword ? "text" : "password"}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -140,7 +151,7 @@ export default function LoginPage() {
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[#00F5FF] transition-colors focus:outline-none"
                   >
                     {showPassword ? (
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -157,25 +168,32 @@ export default function LoginPage() {
               </div>
             </div>
 
-            <button type="submit" disabled={busy || success} className={`btn-primary w-full mt-6 py-2.5 text-xs font-bold ${success ? 'bg-emerald-600 hover:bg-emerald-600 border-emerald-600' : ''}`}>
+            <button 
+              type="submit" 
+              disabled={busy || success} 
+              className={`w-full mt-8 py-3 rounded-xl text-sm font-bold tracking-wide transition-all duration-300 shadow-[0_0_20px_rgba(0,245,255,0.2)] hover:shadow-[0_0_30px_rgba(0,245,255,0.4)] hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none ${
+                success 
+                ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/50 shadow-[0_0_30px_rgba(16,185,129,0.3)]' 
+                : 'bg-[#00F5FF]/10 text-[#00F5FF] border border-[#00F5FF]/30 hover:bg-[#00F5FF]/20'
+              }`}
+            >
               {success ? (
                 <div className="flex items-center justify-center gap-2">
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                  Authentication verified
+                  Authentication Verified
                 </div>
               ) : busy ? (
-                "Authenticating Digital Credentials…"
+                "Authenticating Credentials…"
               ) : (
                 "Sign In to Copilot"
               )}
             </button>
 
-            <div className="mt-6 pt-4 border-t border-slate-100 text-[11px] text-slate-500 bg-slate-50 p-3 rounded-lg border border-slate-200">
-              <span className="font-bold text-slate-700">Prototype Demo Credentials:</span>
-              <div className="font-mono text-slate-600 mt-1">
-                Email: <span className="text-gem-800 font-semibold">procurement@cpcl.gov.in</span>
-                <br />
-                Password: <span className="text-gem-800 font-semibold">demo123</span>
+            <div className="mt-8 pt-6 border-t border-white/10 text-xs text-slate-400 bg-white/5 p-4 rounded-xl border border-white/5">
+              <span className="font-bold text-white tracking-wide">Prototype Demo Credentials:</span>
+              <div className="font-mono text-slate-300 mt-2 space-y-1">
+                <div>Email: <span className="text-[#00F5FF] font-semibold">procurement@cpcl.gov.in</span></div>
+                <div>Password: <span className="text-[#00F5FF] font-semibold">demo123</span></div>
               </div>
             </div>
           </form>
