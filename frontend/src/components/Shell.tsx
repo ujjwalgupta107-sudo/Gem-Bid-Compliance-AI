@@ -112,7 +112,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
           ),
         },
         {
-          href: "/audit",
+          href: "/audit-trail",
           label: "Audit Trail",
           icon: (
             <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -126,7 +126,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
       title: "Administration",
       items: [
         {
-          href: "/connectors",
+          href: "/government-connectors",
           label: "Government Connectors",
           icon: (
             <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">

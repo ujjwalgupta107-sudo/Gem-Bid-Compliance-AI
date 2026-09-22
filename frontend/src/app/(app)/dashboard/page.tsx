@@ -240,7 +240,7 @@ export default function DashboardPage() {
                         </td>
                         <td className="p-4 text-xs text-slate-500 font-medium hidden sm:table-cell">{conn.sync}</td>
                         <td className="p-4 text-right">
-                          <button className="text-xs font-semibold text-gem-600 hover:text-gem-800 hover:underline">View Log</button>
+                          <button onClick={() => router.push('/government-connectors')} className="text-xs font-semibold text-gem-600 hover:text-gem-800 hover:underline">View Log</button>
                         </td>
                       </tr>
                     ))}
