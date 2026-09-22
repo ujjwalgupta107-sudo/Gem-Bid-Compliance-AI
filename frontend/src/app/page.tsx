@@ -1,246 +1,220 @@
 "use client";
 import React, { useState } from "react";
-import Link from "next/link";
-import { LandingNavbar } from "@/components/landing/Navbar";
-import { LandingFooter } from "@/components/landing/Footer";
-import { HeroNetwork3D, NodeDetail } from "@/components/3d/HeroNetwork3D";
-import { NodeDetailModal } from "@/components/3d/NodeDetailModal";
-import { DocumentScanner3D } from "@/components/3d/DocumentScanner3D";
-import { GovernmentHub3D } from "@/components/3d/GovernmentHub3D";
-import { AiEngineCore3D } from "@/components/3d/AiEngineCore3D";
-import { SecurityVault3D } from "@/components/3d/SecurityVault3D";
-import { RiskMatrix3D } from "@/components/3d/RiskMatrix3D";
-import { AuditTimeline3D } from "@/components/3d/AuditTimeline3D";
-import { ComplexitySection } from "@/components/landing/ComplexitySection";
-import { ArrowRight, Sparkles } from "lucide-react";
+import Link from "next/navigation";
+import { Shell } from "@/components/Shell";
+import DashboardMockup3D from "@/components/3d/DashboardMockup3D";
+import { LogoIcon } from "@/components/ui/Logo";
+import FeatureOCR3D from "@/components/3d/FeatureOCR3D";
+import FeatureHybridEngine3D from "@/components/3d/FeatureHybridEngine3D";
+import FeatureAuditChain3D from "@/components/3d/FeatureAuditChain3D";
 
 export default function LandingPage() {
-  const [selectedNode, setSelectedNode] = useState<NodeDetail | null>(null);
+  const [activeFeature, setActiveFeature] = useState<string | null>(null);
+
+  const featureDetails: Record<string, { title: string; input: string; process: string; output: string }> = {
+    "ocr": {
+      title: "LAYOUT-AWARE OCR",
+      input: "Vendor documents (PDFs, Images)",
+      process: "LayoutLMv3 + PaddleOCR for spatial awareness",
+      output: "Structured text, tables, and financial values"
+    },
+    "hybrid": {
+      title: "HYBRID AI ENGINE",
+      input: "Deterministic Rules + Semantic Retrieval",
+      process: "JSON Logic + pgvector RAG validation",
+      output: "Hybrid Compliance Decision (AI reasoning + Hard Rules)"
+    },
+    "audit": {
+      title: "SHA-256 AUDIT CHAIN",
+      input: "System Events & Decisions",
+      process: "Cryptographic hashing of every action",
+      output: "Tamper-proof Verification History for Government Audits"
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-blue-600 selection:text-white relative overflow-hidden">
-      {/* Dynamic Background Mesh Grid */}
-      <div className="fixed inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.15),rgba(255,255,255,0))] pointer-events-none z-0" />
-      <div className="fixed inset-0 bg-[linear-gradient(to_right,#1e293b15_1px,transparent_1px),linear-gradient(to_bottom,#1e293b15_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none z-0" />
+    <div className="min-h-screen bg-[#0B0F17] text-white selection:bg-[#00F5FF] selection:text-black font-sans relative overflow-hidden">
+      
+      {/* Ambient Background Glows */}
+      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[#0070F3] rounded-full mix-blend-screen filter blur-[150px] opacity-40 pointer-events-none" />
+      <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-[#00F5FF] rounded-full mix-blend-screen filter blur-[150px] opacity-30 pointer-events-none" />
+      <div className="absolute top-[30%] left-[40%] w-[30%] h-[30%] bg-emerald-500 rounded-full mix-blend-screen filter blur-[120px] opacity-20 pointer-events-none" />
 
-      {/* Navigation Bar */}
-      <LandingNavbar />
+      {/* Grid Mesh */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
 
-      {/* ═══════════════════════════════════════════════════════════════
-         1. 3D HERO SECTION — COMPLIANCE INTELLIGENCE NETWORK
-         ═══════════════════════════════════════════════════════════════ */}
-      <section id="hero" className="relative pt-32 pb-20 lg:pt-36 lg:pb-28 z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left Content */}
-            <div className="lg:col-span-5 space-y-6 text-left">
-              {/* Brand Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-mono font-bold tracking-wider uppercase">
-                <Sparkles className="w-3.5 h-3.5 animate-pulse" />
-                <span>SIH 2026 INNOVATION</span>
-              </div>
-
-              {/* Large Main Heading */}
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.05]">
-                NEXT-GEN <br />
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-sky-300 to-indigo-400">
-                  BID VERIFICATION
-                </span>
-              </h1>
-
-              {/* Description */}
-              <p className="text-slate-300 text-base sm:text-lg leading-relaxed font-normal">
-                AI-powered tender verification, government registry validation, document intelligence and risk-aware compliance analysis.
-              </p>
-
-              {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-4 pt-2">
-                <Link
-                  href="/tenders"
-                  className="px-6 py-3.5 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm shadow-xl shadow-blue-600/30 flex items-center gap-2 transition-all hover:scale-105 active:scale-95"
-                >
-                  <span>LAUNCH WORKSPACE</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-
-                <a
-                  href="#how-it-works"
-                  className="px-6 py-3.5 rounded-2xl bg-slate-900/80 hover:bg-slate-800 border border-slate-700 text-slate-200 font-bold text-sm transition-all hover:border-slate-600"
-                >
-                  EXPLORE PLATFORM
-                </a>
-              </div>
-
-              {/* Platform Highlights */}
-              <div className="pt-6 border-t border-slate-800/80 grid grid-cols-3 gap-4 text-xs">
-                <div>
-                  <div className="text-lg font-black text-white">100%</div>
-                  <div className="text-slate-400 text-[11px]">SHA-256 Audit</div>
-                </div>
-                <div>
-                  <div className="text-lg font-black text-emerald-400">&lt; 3.0s</div>
-                  <div className="text-slate-400 text-[11px]">Verification Time</div>
-                </div>
-                <div>
-                  <div className="text-lg font-black text-purple-400">5 Feeds</div>
-                  <div className="text-slate-400 text-[11px]">Registry APIs</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right / Center 3D Spatial Network */}
-            <div className="lg:col-span-7">
-              <HeroNetwork3D onSelectNode={(node) => setSelectedNode(node)} />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
-         2. TRUST & INFRASTRUCTURE BANNER
-         ═══════════════════════════════════════════════════════════════ */}
-      <section className="py-8 bg-slate-900/50 border-y border-slate-800/80 backdrop-blur-md z-10 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div className="space-y-1">
-              <div className="text-xs font-mono text-slate-400 uppercase tracking-wider">Target Domain</div>
-              <div className="text-sm font-bold text-white">Government e-Marketplace (GeM)</div>
-            </div>
-            <div className="space-y-1">
-              <div className="text-xs font-mono text-slate-400 uppercase tracking-wider">Registry Validation</div>
-              <div className="text-sm font-bold text-emerald-400">GSTN • PAN • Udyam • MCA</div>
-            </div>
-            <div className="space-y-1">
-              <div className="text-xs font-mono text-slate-400 uppercase tracking-wider">Intelligence Core</div>
-              <div className="text-sm font-bold text-purple-400">Hybrid LLM RAG + Rule DSL</div>
-            </div>
-            <div className="space-y-1">
-              <div className="text-xs font-mono text-slate-400 uppercase tracking-wider">Audit Security</div>
-              <div className="text-sm font-bold text-pink-400">Cryptographic Hash Ledger</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
-         3. 3D HOW IT WORKS — SPATIAL JOURNEY
-         ═══════════════════════════════════════════════════════════════ */}
-      <section id="how-it-works" className="py-24 z-10 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          <div className="text-center max-w-3xl mx-auto space-y-3">
-            <span className="px-3 py-1 rounded-full text-xs font-mono font-bold uppercase bg-blue-500/10 text-blue-400 border border-blue-500/20">
-              3D Product Journey
+      {/* Top Navbar */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0B0F17]/70 backdrop-blur-md border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <LogoIcon size="md" />
+            <span className="font-bold tracking-tight text-white text-lg hidden sm:block">Git Push Force</span>
+            <span className="bg-white/10 text-[#00F5FF] text-[10px] font-bold px-2 py-0.5 rounded-full border border-[#00F5FF]/30 ml-2">
+              SIH26100
             </span>
-            <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
-              From PDF Upload to Immutable Award Sign-off
-            </h2>
-            <p className="text-slate-400 text-sm leading-relaxed">
-              Step through the 3D pipeline showing how raw bidder document submissions are verified against real government registries.
+          </div>
+          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+            <a href="#architecture" className="hover:text-[#00F5FF] transition-colors">Architecture</a>
+            <a href="#engine" className="hover:text-[#00F5FF] transition-colors">Hybrid Engine</a>
+            <a href="#audit" className="hover:text-[#00F5FF] transition-colors">Audit Trail</a>
+            <a href="/login" className="hover:text-[#00F5FF] transition-colors">Live Demo</a>
+          </div>
+          <div className="flex items-center gap-4">
+            <a href="/login" className="bg-[#00F5FF] hover:bg-[#00F5FF]/90 text-slate-900 text-sm font-bold px-5 py-2 rounded-lg shadow-[0_0_15px_rgba(0,245,255,0.4)] transition-all">
+              [ Launch Copilot ]
+            </a>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <main className="relative z-10 pt-32 pb-16 lg:pt-40 lg:pb-24 max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        {/* Left Column */}
+        <div>
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold text-slate-300 mb-6 backdrop-blur-sm">
+            <span className="w-2 h-2 rounded-full bg-[#00F5FF] animate-pulse"></span>
+            Ministry of Petroleum & Natural Gas | CPCL Problem Statement
+          </div>
+          
+          <h1 className="text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] mb-6">
+            Autonomous GeM Bid<br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00F5FF] to-[#0070F3]">Compliance Verification</span>
+          </h1>
+          
+          <p className="text-lg text-slate-400 mb-10 leading-relaxed max-w-lg">
+            Hybrid deterministic logic + Layout-aware OCR to eradicate tender evaluation delays with zero hallucinations.
+          </p>
+
+          <div className="flex flex-col sm:flex-row items-center gap-4">
+            <a href="/login" className="w-full sm:w-auto text-center bg-[#00F5FF] hover:bg-[#00F5FF]/90 text-slate-900 font-bold px-8 py-3.5 rounded-xl shadow-[0_0_20px_rgba(0,245,255,0.3)] transition-all hover:scale-105">
+              [ Analyze Tender Package ]
+            </a>
+            <a href="#architecture" className="w-full sm:w-auto text-center bg-white/5 hover:bg-white/10 text-white font-semibold px-8 py-3.5 rounded-xl border border-white/10 backdrop-blur-sm transition-all hover:border-[#00F5FF]/50">
+              [ View Architecture Flow ]
+            </a>
+          </div>
+        </div>
+
+        {/* Right Column (3D Hologram Mockup) */}
+        <div className="relative h-[400px] lg:h-[600px] w-full flex items-center justify-center">
+          <DashboardMockup3D />
+          
+          {/* Mockup Overlays */}
+          <div className="absolute top-4 right-4 px-3 py-1 bg-amber-500/10 border border-amber-500/30 rounded-md backdrop-blur-md flex items-center gap-2">
+            <div className="w-1.5 h-1.5 bg-amber-400 rounded-full animate-ping"></div>
+            <span className="text-[10px] font-mono text-amber-400 uppercase tracking-wider">Human-in-the-Loop Override Active</span>
+          </div>
+        </div>
+      </main>
+
+      {/* Feature Section (Bento Grid) */}
+      <section id="architecture" className="relative z-10 max-w-7xl mx-auto px-6 py-24 border-t border-white/5">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl lg:text-4xl font-bold tracking-tight mb-4">Features</h2>
+          <p className="text-slate-400 max-w-2xl mx-auto">
+            A secure, deterministic, and highly accurate verification pipeline built for sovereign government deployments.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-fade-in-up relative">
+          
+          {/* Animated Connecting Line (Desktop Only) */}
+          <div className="absolute top-[30%] left-[15%] w-[70%] h-0.5 hidden md:block pointer-events-none z-0">
+            <svg className="w-full h-10 overflow-visible" viewBox="0 0 100 10" preserveAspectRatio="none">
+              <path d="M 0 5 L 100 5" fill="none" stroke="rgba(0, 245, 255, 0.2)" strokeWidth="0.5" strokeDasharray="2, 2" />
+              <path d="M 0 5 L 100 5" fill="none" stroke="#00F5FF" strokeWidth="0.5" strokeDasharray="5, 10">
+                <animate attributeName="stroke-dashoffset" from="15" to="0" dur="2s" repeatCount="indefinite" />
+              </path>
+            </svg>
+          </div>
+
+          {/* Card 1 */}
+          <div 
+            onClick={() => setActiveFeature("ocr")}
+            className="group relative bg-[#0B0F17]/40 backdrop-blur-xl border border-white/10 rounded-3xl p-8 transition-all duration-500 hover:border-[#00F5FF]/50 hover:shadow-[0_0_40px_rgba(0,245,255,0.15)] hover:-translate-y-2 overflow-hidden cursor-pointer z-10 min-h-[400px] flex flex-col"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-[#00F5FF]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            
+            <div className="flex-1 w-full relative mb-6 rounded-2xl overflow-hidden border border-white/5 bg-black/20">
+              <FeatureOCR3D />
+            </div>
+
+            <h3 className="text-xl font-bold text-white mb-3 relative z-10">Layout-Aware OCR</h3>
+            <p className="text-slate-400 text-sm leading-relaxed relative z-10">
+              Powered by LayoutLMv3 and PaddleOCR to precisely extract tabular financial data and spatial structures from complex vendor uploads.
             </p>
           </div>
 
-          <AuditTimeline3D />
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
-         4. 3D DOCUMENT INTELLIGENCE SECTION
-         ═══════════════════════════════════════════════════════════════ */}
-      <section id="document-ocr" className="py-20 bg-slate-900/30 border-y border-slate-800/80 z-10 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <DocumentScanner3D />
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
-         5. 3D GOVERNMENT REGISTRY NETWORK
-         ═══════════════════════════════════════════════════════════════ */}
-      <section id="registries" className="py-24 z-10 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <GovernmentHub3D />
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
-         6. 3D AI COMPLIANCE ENGINE SECTION
-         ═══════════════════════════════════════════════════════════════ */}
-      <section id="ai-engine" className="py-20 bg-slate-900/30 border-y border-slate-800/80 z-10 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AiEngineCore3D />
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
-         7. 3D RISK INTELLIGENCE SECTION
-         ═══════════════════════════════════════════════════════════════ */}
-      <section id="risk" className="py-24 z-10 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <RiskMatrix3D />
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
-         8. 3D SECURITY & VAULT SECTION
-         ═══════════════════════════════════════════════════════════════ */}
-      <section id="security" className="py-20 bg-slate-900/30 border-y border-slate-800/80 z-10 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SecurityVault3D />
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
-         9. TECHNICAL PROJECT COMPLEXITY SECTION
-         ═══════════════════════════════════════════════════════════════ */}
-      <section id="complexity" className="py-24 z-10 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ComplexitySection />
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════
-         10. FINAL CALL TO ACTION
-         ═══════════════════════════════════════════════════════════════ */}
-      <section className="py-20 z-10 relative">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="p-10 sm:p-14 rounded-3xl bg-gradient-to-r from-blue-900/60 via-slate-900 to-purple-900/60 border border-blue-500/30 text-center space-y-6 shadow-2xl backdrop-blur-xl relative overflow-hidden">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/40 text-xs font-mono font-bold">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>SIH 2026 GOVERNMENT TENDER AI</span>
+          {/* Card 2 */}
+          <div 
+            onClick={() => setActiveFeature("hybrid")}
+            className="group relative bg-[#0B0F17]/40 backdrop-blur-xl border border-white/10 rounded-3xl p-8 transition-all duration-500 hover:border-[#0070F3]/50 hover:shadow-[0_0_40px_rgba(0,112,243,0.15)] hover:-translate-y-2 overflow-hidden cursor-pointer delay-100 z-10 min-h-[400px] flex flex-col"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-[#0070F3]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            
+            <div className="flex-1 w-full relative mb-6 rounded-2xl overflow-hidden border border-white/5 bg-black/20">
+              <FeatureHybridEngine3D />
             </div>
 
-            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
-              Ready to Accelerate Tender Compliance Verification?
-            </h2>
-
-            <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-              Experience automated document intelligence, sandbox registry verification, and AI-assisted officer decision making live on the workspace.
+            <h3 className="text-xl font-bold text-white mb-3 relative z-10">Hybrid Engine</h3>
+            <p className="text-slate-400 text-sm leading-relaxed relative z-10">
+              Combines strict JSON Logic Deterministic Rules with semantic RAG using pgvector to eliminate AI hallucinations and ensure precise compliance.
             </p>
+          </div>
 
-            <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
-              <Link
-                href="/tenders"
-                className="px-8 py-4 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm shadow-xl shadow-blue-600/30 flex items-center gap-2 transition-all hover:scale-105"
-              >
-                <span>ENTER WORKSPACE</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-
-              <Link
-                href="/login"
-                className="px-8 py-4 rounded-2xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200 font-bold text-sm transition-all"
-              >
-                PROCUREMENT OFFICER LOGIN
-              </Link>
+          {/* Card 3 */}
+          <div 
+            onClick={() => setActiveFeature("audit")}
+            className="group relative bg-[#0B0F17]/40 backdrop-blur-xl border border-white/10 rounded-3xl p-8 transition-all duration-500 hover:border-emerald-500/50 hover:shadow-[0_0_40px_rgba(16,185,129,0.15)] hover:-translate-y-2 overflow-hidden cursor-pointer delay-200 z-10 min-h-[400px] flex flex-col"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            
+            <div className="flex-1 w-full relative mb-6 rounded-2xl overflow-hidden border border-white/5 bg-black/20">
+              <FeatureAuditChain3D />
             </div>
+
+            <h3 className="text-xl font-bold text-white mb-3 relative z-10">SHA-256 Audit Chain</h3>
+            <p className="text-slate-400 text-sm leading-relaxed relative z-10">
+              Every automated decision is hashed and chained into a tamper-proof cryptographic log, providing complete transparency for government audits.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Interactive 3D Node Inspection Modal */}
-      <NodeDetailModal node={selectedNode} onClose={() => setSelectedNode(null)} />
+      {/* Feature Details Modal */}
+      {activeFeature && featureDetails[activeFeature] && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm cursor-pointer" onClick={() => setActiveFeature(null)} />
+          <div className="relative bg-[#0B0F17] border border-white/20 rounded-2xl p-8 max-w-md w-full shadow-2xl animate-scale-in">
+            <button 
+              onClick={() => setActiveFeature(null)}
+              className="absolute top-4 right-4 text-white/50 hover:text-white"
+            >
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+            <h4 className="text-[#00F5FF] text-sm font-bold tracking-widest mb-6 border-b border-white/10 pb-4">
+              {featureDetails[activeFeature].title}
+            </h4>
+            <div className="space-y-6">
+              <div>
+                <span className="block text-[10px] uppercase text-white/40 font-bold mb-1">Input</span>
+                <p className="text-white text-sm font-medium">{featureDetails[activeFeature].input}</p>
+              </div>
+              <div>
+                <span className="block text-[10px] uppercase text-white/40 font-bold mb-1">Processing</span>
+                <p className="text-[#0070F3] text-sm font-medium">{featureDetails[activeFeature].process}</p>
+              </div>
+              <div>
+                <span className="block text-[10px] uppercase text-white/40 font-bold mb-1">Output</span>
+                <p className="text-emerald-400 text-sm font-medium">{featureDetails[activeFeature].output}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
-      {/* Footer */}
-      <LandingFooter />
     </div>
   );
 }
