@@ -48,7 +48,7 @@ export default function LoginPage() {
                 <div className="flex items-center gap-2">
                   <span className="text-xl font-black text-white tracking-tight">Bid Compliance Copilot</span>
                   <span className="bg-gem-800 text-amber-300 text-[10px] font-bold px-2 py-0.5 rounded border border-gem-700">
-                    SIH 2024 AI
+                    SIH 2026 AI
                   </span>
                 </div>
               </div>
