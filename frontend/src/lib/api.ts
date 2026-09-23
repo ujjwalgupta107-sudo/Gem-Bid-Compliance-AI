@@ -24,7 +24,7 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
   let res: Response;
   try {
     res = await fetch(`${API_BASE}${path}`, { ...options, headers });
-  } catch (err) {
+  } catch {
     throw new ApiError("Unable to connect to the authentication service.", 0);
   }
 

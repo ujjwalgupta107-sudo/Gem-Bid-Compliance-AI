@@ -1,9 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
-export default function ComplianceMatrixPage() {
+function ComplianceMatrixContent() {
   const searchParams = useSearchParams();
   const initialStatus = searchParams.get("status");
   const [activeTab, setActiveTab] = useState(initialStatus || "ALL");
@@ -185,5 +185,13 @@ export default function ComplianceMatrixPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ComplianceMatrixPage() {
+  return (
+    <Suspense fallback={<div className="p-8 text-center text-slate-400">Loading compliance matrix...</div>}>
+      <ComplianceMatrixContent />
+    </Suspense>
   );
 }

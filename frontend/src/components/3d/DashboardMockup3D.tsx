@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import * as THREE from "three";
 import { SpatialCanvas } from "./SpatialCanvas";
 
@@ -9,7 +9,7 @@ export default function DashboardMockup3D() {
   const pillsRef = useRef<{ mesh: THREE.Group; targetY: number; delay: number }[]>([]);
   const ringRef = useRef<THREE.Mesh | null>(null);
 
-  const handleSceneReady = (scene: THREE.Scene, camera: THREE.PerspectiveCamera, renderer: THREE.WebGLRenderer) => {
+  const handleSceneReady = (scene: THREE.Scene, _camera: THREE.PerspectiveCamera, _renderer: THREE.WebGLRenderer) => {
     const group = new THREE.Group();
     scene.add(group);
     groupRef.current = group;

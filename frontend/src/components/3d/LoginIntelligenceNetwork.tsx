@@ -2,7 +2,6 @@
 import React, { useRef, useState, useCallback } from "react";
 import * as THREE from "three";
 import { SpatialCanvas } from "./SpatialCanvas";
-import NodeDetailModal from "./NodeDetailModal";
 
 const NODES = [
   { id: "gstn", label: "GSTN", description: "Government Registry Verification\nStatus: Operational", color: "#10b981", pos: [-3, 2, 0] },
@@ -70,7 +69,7 @@ export default function LoginIntelligenceNetwork() {
     coreMesh.add(wireMesh);
 
     // Orbital Nodes
-    NODES.forEach((nodeData, idx) => {
+    NODES.forEach((nodeData) => {
       const nodeGroup = new THREE.Group();
       const vecPos = new THREE.Vector3(...nodeData.pos);
       nodeGroup.position.copy(vecPos);

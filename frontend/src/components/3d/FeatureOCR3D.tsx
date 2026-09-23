@@ -114,7 +114,7 @@ export default function FeatureOCR3D() {
       // Laser scan up and down
       const speed = 1.5 + (h * 2); // Faster scan on hover
       laserRef.current.position.y = Math.sin(time * speed) * 1.8;
-      laserRef.current.material.opacity = 0.5 + (Math.sin(time * 10) * 0.2); // Flicker
+      (laserRef.current.material as THREE.MeshBasicMaterial).opacity = 0.5 + (Math.sin(time * 10) * 0.2); // Flicker
     }
 
     if (coreRef.current) {

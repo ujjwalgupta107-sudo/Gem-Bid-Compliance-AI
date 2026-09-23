@@ -35,7 +35,7 @@ export default function ComplianceIntelligenceCore3D() {
     flowPos: Float32Array;
   } | null>(null);
 
-  const handleSceneReady = (scene: THREE.Scene, camera: THREE.PerspectiveCamera, renderer: THREE.WebGLRenderer) => {
+  const handleSceneReady = (scene: THREE.Scene, camera: THREE.PerspectiveCamera, _renderer: THREE.WebGLRenderer) => {
     cameraRef.current = camera;
     
     // Core Group

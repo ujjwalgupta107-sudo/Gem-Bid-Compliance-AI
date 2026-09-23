@@ -14,6 +14,15 @@ from fastapi.responses import FileResponse
 router = APIRouter(tags=["bids"])
 
 
+@router.get("/bids")
+def list_bids(status: str | None = None, db: Session = Depends(get_db), user: User = Depends(get_current_user)):
+    q = db.query(Bid)
+    if status:
+        q = q.filter(Bid.status == status)
+    bids = q.order_by(Bid.submitted_at.desc()).all()
+    return [s_bid(b, include_tender=True) for b in bids]
+
+
 @router.post("/tenders/{tender_id}/bids")
 def create_bid(tender_id: str, payload: BidCreate, db: Session = Depends(get_db), user: User = Depends(get_current_user)):
     tender = db.query(Tender).filter(Tender.id == tender_id).first()

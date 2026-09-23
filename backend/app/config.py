@@ -18,6 +18,15 @@ class Settings(BaseSettings):
     allowed_mime_types: tuple = ("application/pdf", "image/png", "image/jpeg")
     ai_provider: str = os.getenv("AI_PROVIDER", "local")  # local | openai | anthropic (pluggable)
 
+    @property
+    def sqlalchemy_database_url(self) -> str:
+        url = self.database_url
+        if not url:
+            return f"sqlite:///{BASE_DIR / 'gem_compliance.db'}"
+        if url.startswith("postgres://"):
+            return url.replace("postgres://", "postgresql://", 1)
+        return url
+
     class Config:
         env_file = ".env"
 

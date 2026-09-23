@@ -69,8 +69,8 @@ export default function FeatureHybridEngine3D() {
       return curve;
     };
 
-    const leftCurve = createLine(leftNode.position, core.position, 0x10b981);
-    const rightCurve = createLine(rightNode.position, core.position, 0xa855f7);
+    createLine(leftNode.position, core.position, 0x10b981);
+    createLine(rightNode.position, core.position, 0xa855f7);
 
     // 5. Particles Flowing
     const createParticle = (side: "left" | "right", color: number) => {

@@ -1,7 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import Link from "next/navigation";
-import { Shell } from "@/components/Shell";
 import DashboardMockup3D from "@/components/3d/DashboardMockup3D";
 import { LogoIcon } from "@/components/ui/Logo";
 import FeatureOCR3D from "@/components/3d/FeatureOCR3D";

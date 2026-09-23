@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/lib/auth";
 import { ApiError } from "@/lib/api";
 import LoginIntelligenceNetwork from "@/components/3d/LoginIntelligenceNetwork";
-import { Logo } from "@/components/ui/Logo";
 import { BrandText } from "@/components/ui/BrandText";
 
 export default function LoginPage() {

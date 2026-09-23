@@ -17,7 +17,6 @@ export function Logo({ size = "md", variant = "dark", className = "" }: LogoProp
   const s = sizes[size];
   const bgColor = variant === "dark" ? "bg-slate-800" : "bg-white/10";
   const ringColor = variant === "dark" ? "ring-1 ring-slate-700" : "ring-1 ring-white/20";
-  const textColor = variant === "dark" ? "text-white" : "text-white";
   const subColor = variant === "dark" ? "text-slate-300" : "text-slate-400";
 
   return (
