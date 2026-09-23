@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "standalone",
   async rewrites() {
     // In production (single-container deploy), the backend runs on an internal
     // port that isn't publicly exposed. The browser calls same-origin `/api/*`

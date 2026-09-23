@@ -20,7 +20,7 @@ RUN npm run build
 FROM node:22-bookworm-slim
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends python3 python3-pip python3-venv && \
+    apt-get install -y --no-install-recommends python3 python3-pip python3-venv ca-certificates && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
@@ -31,12 +31,13 @@ RUN python3 -m venv /app/backend/venv && \
     /app/backend/venv/bin/pip install --no-cache-dir -r /app/backend/requirements-prod.txt
 COPY backend/ /app/backend/
 
-# Frontend: optimized standalone server + static assets (fits easily in Render's 512MB RAM)
-COPY --from=frontend-builder /app/frontend/.next/standalone /app/frontend
-COPY --from=frontend-builder /app/frontend/.next/static /app/frontend/.next/static
+# Frontend: runtime dependencies + built output
+COPY frontend/package*.json /app/frontend/
+COPY --from=frontend-builder /app/frontend/.next /app/frontend/.next
 COPY --from=frontend-builder /app/frontend/public /app/frontend/public
+RUN cd /app/frontend && npm ci --omit=dev
 
-# Robust process supervisor
+# Robust start script
 COPY start.sh /app/start.sh
 RUN chmod +x /app/start.sh
 

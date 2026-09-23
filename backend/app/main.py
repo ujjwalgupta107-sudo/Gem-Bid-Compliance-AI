@@ -10,25 +10,24 @@ from app.routers import auth, tenders, bids, documents, findings, verification_c
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger("gem-compliance")
 
-Base.metadata.create_all(bind=engine)
-
-
-def _seed_if_empty():
-    """Populate demo data on first boot (empty DB) — covers fresh deploys where
-    nobody ran `python -m app.seed` manually, e.g. Render/Railway/Docker."""
-    db = SessionLocal()
+def _init_db_and_seed():
     try:
-        has_users = db.query(User).first() is not None
-    finally:
-        db.close()
-    if not has_users:
-        logger.info("Database is empty — running demo seed...")
-        from app.seed import seed
-        seed()
-        logger.info("Demo seed complete.")
+        Base.metadata.create_all(bind=engine)
+        db = SessionLocal()
+        try:
+            has_users = db.query(User).first() is not None
+        finally:
+            db.close()
+        if not has_users:
+            logger.info("Database is empty — running demo seed...")
+            from app.seed import seed
+            seed()
+            logger.info("Demo seed complete.")
+    except Exception as e:
+        logger.error(f"Database initialization warning (will retry on incoming requests): {e}")
 
 
-_seed_if_empty()
+_init_db_and_seed()
 
 app = FastAPI(
     title="AI-Powered Integrated Bid Compliance Verification Platform",
